@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectGoods } from '../store/goodsSlice';
-import { selectCart } from '../store/cartSlice';
-import { decrement, deleteItem, increment, deleteAll } from '../store/cartSlice';
+import { decrement, deleteItem, increment, deleteAll, selectCart, selectHideCart, cartSwitcherVisibility } from '../store/cartSlice';
 import Cart from '../components/Cart';
 
 const CartList = () => {
   const goods = useSelector(selectGoods);
   const cart = useSelector(selectCart);
+  const visibility = useSelector(selectHideCart);
   const dispatch = useDispatch();
 
   const goodsObj = goods.reduce((acc, item) => {
@@ -29,12 +29,15 @@ const CartList = () => {
     }
   };
 
-  console.log(goodsObj);
-  console.log(cart);
+  const closeCart = (event) => {
+    event.preventDefault();
+    dispatch(cartSwitcherVisibility());
+  };
+
   return (
-    <>
+    <div className={visibility} id="cart">
       <div>
-        <button>x</button>
+        <button onClick={closeCart}>x</button>
       </div>
       <table onClick={cartHandler}>
         <tbody>
@@ -68,7 +71,7 @@ const CartList = () => {
       <div>
         <button>Сделать заказ</button>
       </div>
-    </>
+    </div>
   );
 };
 

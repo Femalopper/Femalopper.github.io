@@ -61,3 +61,26 @@
   .deleteAll {
     cursor: pointer;
   }
+
+  .hide {
+    display: none;
+  }
+
+  .mini-cart {
+    position: relative;
+    cursor: pointer;
+  }
+
+  .circle {
+    position: fixed;
+    top: 50px;
+    left: 20px;
+    width: 12px;
+    height: 16px;
+    background-color: rgb(127, 227, 255);
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 0.6em;
+    padding: 1px;
+  }
