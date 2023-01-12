@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectGoods } from '../store/goodsSlice';
 import Goods from '../components/Goods';
-import { increment, selectQuantity, writeQuantity } from '../store/cartSlice';
+import { increment } from '../store/cartSlice';
 
 const GoodsList = () => {
   const goods = useSelector(selectGoods);

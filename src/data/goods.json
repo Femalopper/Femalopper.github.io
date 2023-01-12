@@ -3,24 +3,24 @@
         "articul": "01",
         "title": "База + Топ комплект",
         "cost": "250 руб.",
-        "image": "https://github.com/Femalopper/frontend-project-onlineShop/blob/main/img/1.jpg?raw=true"
+        "image": "1.jpg"
     },
     {
         "articul": "10",
         "title": "База/Топ/Праймер",
         "cost": "350 руб.",
-        "image": "https://github.com/Femalopper/frontend-project-onlineShop/blob/main/img/2.jpg?raw=true"
+        "image": "2.jpg"
     },
     {
         "articul": "00",
         "title": "Стартовый Bluesky",
         "cost": "1500 руб.",
-        "image": "https://github.com/Femalopper/frontend-project-onlineShop/blob/main/img/5.jpg?raw=true"
+        "image": "5.jpg"
     },
     {
         "articul": "11",
         "title": "Начальный Bluesky",
         "cost": "1700 руб.",
-        "image": "https://github.com/Femalopper/frontend-project-onlineShop/blob/main/img/6.jpg?raw=true"
+        "image": "6.jpg"
     }
 ]

@@ -3,7 +3,7 @@ import './Goods.css';
 const Goods = (props) => {
   return (
     <div className="goods-block">
-      <img src={props.data.image} alt="" />
+      <img src={require(`../img/${props.data.image}`)} alt="" />
       <p className="good-title">{props.data.title}</p>
       <p className="price">{props.data.cost}</p>
       <div className="change-quantity">
