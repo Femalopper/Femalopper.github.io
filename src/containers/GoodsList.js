@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectGoods } from '../store/goodsSlice';
 import Goods from '../components/Goods';
 import { increment } from '../store/cartSlice';
+import Swal from 'sweetalert2';
 
 const GoodsList = () => {
   const goods = useSelector(selectGoods);
@@ -26,6 +27,14 @@ const GoodsList = () => {
       const data = [t.getAttribute('data-key'), currentQuantity.value];
       dispatch(increment(data));
       currentQuantity.value = 1;
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Товар добавлен в корзину!',
+        showConfirmButton: false,
+        timer: 1500,
+        width: 300,
+      });
     }
   };
 
