@@ -1,37 +1,52 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectGoods } from '../store/goodsSlice';
 import Goods from '../components/Goods';
-import { increment, cartSwitcherVisibility, selectShowCart, selectCart, selectCounter } from '../store/cartSlice';
+import { increment, selectQuantity, writeQuantity } from '../store/cartSlice';
 
 const GoodsList = () => {
   const goods = useSelector(selectGoods);
-  const cartCounter = useSelector(selectCounter);
-  console.log(cartCounter);
-  const visibility = useSelector(selectShowCart);
+
   const dispatch = useDispatch();
 
   const clickHandler = (event) => {
     event.preventDefault();
     const t = event.target;
-    if (!t.classList.contains('add-to-cart')) return true;
-    dispatch(increment(t.getAttribute('data-key')));
+    const currentQuantity = document.getElementById(t.getAttribute('data-key'));
+
+    if (t.classList.contains('plus-quantity')) {
+      const addValue = +currentQuantity.value + 1;
+      currentQuantity.value = addValue;
+    } else if (t.classList.contains('minus-quantity')) {
+      const reduceValue = +currentQuantity.value - 1;
+      if (reduceValue > 0) {
+        currentQuantity.value = reduceValue;
+      }
+    } else if (t.classList.contains('add-to-cart')) {
+      const data = [t.getAttribute('data-key'), currentQuantity.value];
+      dispatch(increment(data));
+      currentQuantity.value = 1;
+    }
   };
 
-  const openCart = (event) => {
-    event.preventDefault();
-    dispatch(cartSwitcherVisibility());
+  const inputIsValid = (event) => {
+    const code = event.keyCode;
+    if ((code <= 194 && code >= 187) || (event.target.value.length > 1 && code !== 8)) {
+      event.preventDefault();
+    }
+  };
+
+  const inputIsEmpty = (event) => {
+    if (event.target.value === '') {
+      event.target.value = 1;
+    }
   };
 
   return (
-    <div className={visibility} id="goods">
-      <div>
-        <img src={require('../img/cart.png')} className="mini-cart" alt="mini-cart-img" width="30" height="30" onClick={openCart}></img>
-        <span class="circle">{cartCounter}</span>
-      </div>
+    <div>
       <div className="goods-field" onClick={clickHandler}>
         {goods.map((item) => (
-          <Goods data={item} key={item.articul} />
+          <Goods data={item} key={item.articul} isValid={inputIsValid} isEmpty={inputIsEmpty} />
         ))}
       </div>
     </div>

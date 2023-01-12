@@ -10,10 +10,11 @@ export const cartSlice = createSlice({
   },
   reducers: {
     increment: (state, data) => {
-      const articul = data.payload;
+      const articul = data.payload[0];
+      const currentQuantity = +data.payload[1];
       if (state.value[articul] === undefined) state.value[articul] = 0;
-      state.value[articul]++;
-      state.counter++;
+      state.value[articul] += currentQuantity;
+      state.counter += currentQuantity;
     },
     decrement: (state, data) => {
       const articul = data.payload;
@@ -22,7 +23,7 @@ export const cartSlice = createSlice({
         delete state.value[articul];
       } else {
         state.value[articul]--;
-        state.counter++;
+        state.counter--;
       }
     },
     deleteItem: (state, data) => {
@@ -34,8 +35,7 @@ export const cartSlice = createSlice({
       state.value = {};
       state.counter = 0;
     },
-    cartSwitcherVisibility: (state, elemById) => {
-      console.log(elemById);
+    cartSwitcherVisibility: (state) => {
       if (state.showCart === '') {
         state.showCart = 'hide';
         state.hideCart = '';
@@ -44,13 +44,25 @@ export const cartSlice = createSlice({
         state.hideCart = 'hide';
       }
     },
+    /*
+    writeQuantity: (state, value, code) => {
+      console.log(value.payload);
+      const val = +value.payload;
+      console.log(val);
+      const keyCode = code;
+      if (isNaN(val) || val < 1) {
+        return;
+      } else state.quantity = Math.round(val);
+    },
+    */
   },
 });
 
-export const { increment, decrement, deleteItem, deleteAll, cartSwitcherVisibility } = cartSlice.actions;
+export const { increment, decrement, deleteItem, deleteAll, cartSwitcherVisibility, writeQuantity } = cartSlice.actions;
 export const selectCart = (state) => state.cart.value;
 export const selectCounter = (state) => state.cart.counter;
 export const selectShowCart = (state) => state.cart.showCart;
 export const selectHideCart = (state) => state.cart.hideCart;
+export const selectQuantity = (state) => state.cart.quantity;
 
 export default cartSlice.reducer;

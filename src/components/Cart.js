@@ -9,7 +9,7 @@ const Cart = (props) => {
         <td>{props.dataArticul.title}</td>
         <td>{props.dataArticul.cost}</td>
         <td>{props.quantity}</td>
-        <td>{props.quantity * props.dataArticul.cost}</td>
+        <td>{props.quantity * +props.dataArticul.cost.slice(0, -5)}</td>
         <td>
           <button className="minus" data-key={props.dataArticul.articul}>
             -
@@ -21,7 +21,7 @@ const Cart = (props) => {
           </button>
         </td>
         <td>
-          <button className="deleteItem" data-key={props.dataArticul.articul}>
+          <button className="delete-item" data-key={props.dataArticul.articul}>
             x
           </button>
         </td>

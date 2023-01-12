@@ -1,14 +1,26 @@
 [
     {
-        "articul": "284s",
-        "title": "Apple",
-        "cost": 70,
-        "image": "https://cdn0.iconfinder.com/data/icons/fruity-3/512/Apple-64.png"
+        "articul": "01",
+        "title": "База + Топ комплект",
+        "cost": "250 руб.",
+        "image": "https://github.com/Femalopper/frontend-project-onlineShop/blob/main/img/1.jpg?raw=true"
     },
     {
-        "articul": "2s8d",
-        "title": "Lemon",
-        "cost": 40,
-        "image": "https://cdn0.iconfinder.com/data/icons/fruity-3/512/Lemon-64.png"
+        "articul": "10",
+        "title": "База/Топ/Праймер",
+        "cost": "350 руб.",
+        "image": "https://github.com/Femalopper/frontend-project-onlineShop/blob/main/img/2.jpg?raw=true"
+    },
+    {
+        "articul": "00",
+        "title": "Стартовый Bluesky",
+        "cost": "1500 руб.",
+        "image": "https://github.com/Femalopper/frontend-project-onlineShop/blob/main/img/5.jpg?raw=true"
+    },
+    {
+        "articul": "11",
+        "title": "Начальный Bluesky",
+        "cost": "1700 руб.",
+        "image": "https://github.com/Femalopper/frontend-project-onlineShop/blob/main/img/6.jpg?raw=true"
     }
 ]
