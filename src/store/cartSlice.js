@@ -7,6 +7,7 @@ export const cartSlice = createSlice({
     counter: 0,
     showCart: '',
     hideCart: 'hide',
+    empty: 'hide',
   },
   reducers: {
     increment: (state, data) => {
@@ -44,6 +45,13 @@ export const cartSlice = createSlice({
         state.hideCart = 'hide';
       }
     },
+    cartIsEmpty: (state) => {
+      if (state.counter === 0) {
+        state.empty = '';
+      } else {
+        state.empty = 'hide';
+      }
+    },
     /*
     writeQuantity: (state, value, code) => {
       console.log(value.payload);
@@ -58,11 +66,11 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { increment, decrement, deleteItem, deleteAll, cartSwitcherVisibility, writeQuantity } = cartSlice.actions;
+export const { increment, decrement, deleteItem, deleteAll, cartSwitcherVisibility, writeQuantity, cartIsEmpty } = cartSlice.actions;
 export const selectCart = (state) => state.cart.value;
 export const selectCounter = (state) => state.cart.counter;
 export const selectShowCart = (state) => state.cart.showCart;
 export const selectHideCart = (state) => state.cart.hideCart;
-export const selectQuantity = (state) => state.cart.quantity;
+export const selectEmptyCart = (state) => state.cart.empty;
 
 export default cartSlice.reducer;

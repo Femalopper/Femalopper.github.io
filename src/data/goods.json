@@ -2,25 +2,109 @@
     {
         "articul": "01",
         "title": "База + Топ комплект",
-        "cost": "250 руб.",
+        "cost": "250",
         "image": "1.jpg"
     },
     {
         "articul": "10",
         "title": "База/Топ/Праймер",
-        "cost": "350 руб.",
+        "cost": "350",
         "image": "2.jpg"
     },
     {
         "articul": "00",
         "title": "Стартовый Bluesky",
-        "cost": "1500 руб.",
+        "cost": "1500",
         "image": "5.jpg"
     },
     {
         "articul": "11",
         "title": "Начальный Bluesky",
-        "cost": "1700 руб.",
+        "cost": "1700",
+        "image": "6.jpg"
+    },
+    {
+        "articul": "11",
+        "title": "Начальный Bluesky",
+        "cost": "1700",
+        "image": "6.jpg"
+    },
+    {
+        "articul": "11",
+        "title": "Начальный Bluesky",
+        "cost": "1700",
+        "image": "6.jpg"
+    },
+    {
+        "articul": "11",
+        "title": "Начальный Bluesky",
+        "cost": "1700",
+        "image": "6.jpg"
+    },
+    {
+        "articul": "11",
+        "title": "Начальный Bluesky",
+        "cost": "1700",
+        "image": "6.jpg"
+    },
+    {
+        "articul": "11",
+        "title": "Начальный Bluesky",
+        "cost": "1700",
+        "image": "6.jpg"
+    },
+    {
+        "articul": "11",
+        "title": "Начальный Bluesky",
+        "cost": "1700",
+        "image": "6.jpg"
+    },
+    {
+        "articul": "11",
+        "title": "Начальный Bluesky",
+        "cost": "1700",
+        "image": "6.jpg"
+    },
+    {
+        "articul": "11",
+        "title": "Начальный Bluesky",
+        "cost": "1700",
+        "image": "6.jpg"
+    },
+    {
+        "articul": "11",
+        "title": "Начальный Bluesky",
+        "cost": "1700",
+        "image": "6.jpg"
+    },
+    {
+        "articul": "11",
+        "title": "Начальный Bluesky",
+        "cost": "1700",
+        "image": "6.jpg"
+    },
+    {
+        "articul": "11",
+        "title": "Начальный Bluesky",
+        "cost": "1700",
+        "image": "6.jpg"
+    },
+    {
+        "articul": "11",
+        "title": "Начальный Bluesky",
+        "cost": "1700",
+        "image": "6.jpg"
+    },
+    {
+        "articul": "11",
+        "title": "Начальный Bluesky",
+        "cost": "1700",
+        "image": "6.jpg"
+    },
+    {
+        "articul": "11",
+        "title": "Начальный Bluesky",
+        "cost": "1700",
         "image": "6.jpg"
     }
 ]

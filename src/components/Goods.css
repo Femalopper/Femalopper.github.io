@@ -1,9 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Dancing+Script:wght@700&family=Oswald:wght@200;300;400&family=Secular+One&display=swap');
 
-.goods-field {
+.goods-wrapper {
   display: flex;
   justify-content: center;
-  margin-top: 80px;
+}
+
+.goods-field {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 60px;
 }
 
 .goods-block {

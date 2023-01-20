@@ -52,7 +52,7 @@ const GoodsList = () => {
   };
 
   return (
-    <div>
+    <div className="goods-wrapper">
       <div className="goods-field" onClick={clickHandler}>
         {goods.map((item) => (
           <Goods data={item} key={item.articul} isValid={inputIsValid} isEmpty={inputIsEmpty} />

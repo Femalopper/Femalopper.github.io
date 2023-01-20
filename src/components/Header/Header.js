@@ -1,6 +1,7 @@
+import { useEffect } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectShowCart, selectCounter, cartSwitcherVisibility } from '../../store/cartSlice';
+import { selectShowCart, selectCounter, cartSwitcherVisibility, cartIsEmpty } from '../../store/cartSlice';
 import './Header.css';
 
 const Header = (props) => {
@@ -20,17 +21,20 @@ const Header = (props) => {
   const openCart = (event) => {
     event.preventDefault();
     dispatch(cartSwitcherVisibility());
+    dispatch(cartIsEmpty());
   };
 
   return (
     <div className={visibility} id="goods">
       <div className="menu">
-        <div className="logo">Shellac Butik</div>
-        <nav>
-          <ul>{cat}</ul>
-        </nav>
-        <img src={require('../../img/cart.png')} className="mini-cart" alt="mini-cart-img" width="30" height="30" onClick={openCart}></img>
-        <span className="circle">{cartCounter}</span>
+        <div className="menu-logo-nav-cart">
+          <div className="logo">Shellac Butik</div>
+          <nav>
+            <ul>{cat}</ul>
+          </nav>
+          <img src={require('../../img/cart.png')} className="mini-cart" alt="mini-cart-img" width="30" height="30" onClick={openCart}></img>
+          <span className="circle">{cartCounter}</span>
+        </div>
       </div>
       <Outlet />
     </div>

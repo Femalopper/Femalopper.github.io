@@ -14,16 +14,23 @@ td, tr, th {
   text-align: center;
 }
 
-th {
-  border-bottom: 1px solid black;
-}
-
 
 table {
-  max-width: 780px;
-  border: 1px solid black;
-  border-collapse: collapse;
+  width: 100%;
   font-size: 0.9em;
+  border-collapse: collapse;
+}
+
+th {
+  border-bottom: 1px dashed rgb(201, 201, 201);
+  padding-bottom: 15px;
+  padding-top: 15px;
+  font-weight: 400 ;
+}
+
+td {
+  padding-bottom: 20px;
+  padding-top: 20px;
 }
 
 .img {
@@ -46,15 +53,16 @@ table {
   width: 90%;
   margin: 0;
   list-style: none;
-  padding-top: 15px;
 }
 
 #goods ul li a{
+  position: absolute;
+  top: 15px;
+  left: 700px;
   justify-content: center;
   font-family: 'Caveat', cursive;
   font-size: 1.6em;
   color:rgb(216, 124, 237);
-  margin-left: 50px;
 }
 
 .menu {
