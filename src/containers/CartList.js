@@ -15,6 +15,7 @@ import {
 } from '../store/cartSlice';
 import Cart from '../components/Cart';
 import '../components/Cart.css';
+import Swal from 'sweetalert2';
 
 const CartList = () => {
   const goods = useSelector(selectGoods);
@@ -60,7 +61,7 @@ const CartList = () => {
       dispatch(cartIsEmpty());
     } else if (t.classList.contains('plus')) {
       dispatch(increment([t.getAttribute('data-key'), 1]));
-    } else if (t.classList.contains('delete-all')) {
+    } else if (t.classList.contains('delete') || t.classList.contains('delete')) {
       dispatch(deleteAll());
       dispatch(cartIsEmpty());
     } else if (t.classList.contains('delete-item')) {
@@ -70,7 +71,9 @@ const CartList = () => {
   };
 
   const closeCart = (event) => {
-    event.preventDefault();
+    if (event) {
+      event.preventDefault();
+    }
     const animatedWrapper = document.querySelector('#cart');
     animatedWrapper.classList.add('animate-cart-close');
     setTimeout(() => {
@@ -115,6 +118,48 @@ const CartList = () => {
     activateMakeOrderBtn();
   };
 
+  const getCartData = () => {
+    const cartData = {
+      items: [],
+      totalQuantity: counter,
+      totalSum: 0,
+    };
+    cartData.items = Object.keys(cart).map((key) => ({ item: goodsObj[key], quantity: cart[key] }));
+    cartData.totalSum = cartData.items.reduce((acc, { item, quantity }) => {
+      acc += +item['cost'] * quantity;
+      return acc;
+    }, 0);
+    return cartData;
+  };
+
+  const sendOrder = (event) => {
+    event.preventDefault();
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Заказ оформлен! Ожидайте звонка.',
+      showConfirmButton: false,
+      timer: 1500,
+      width: 300,
+    });
+
+    const form = document.getElementById('cart-data');
+    const params = new FormData(form);
+    fetch('#', {
+      method: 'POST',
+      body: { productsData: getCartData(), userData: params },
+    });
+
+    const cart = document.querySelector('#cart');
+    cart.style.pointerEvents = 'none';
+    setTimeout(() => {
+      dispatch(deleteAll());
+      dispatch(cartIsEmpty());
+      closeCart();
+      cart.style.pointerEvents = 'auto';
+    }, 2500);
+  };
+
   return (
     <div className={`${visibility} cart-container`} id="cart">
       <div className="cart">
@@ -125,8 +170,8 @@ const CartList = () => {
               <th>Цена / ₽</th>
               <th>Общая цена / ₽</th>
               <th>Кол-во</th>
-              <th className="delete-all">
-                <span className="delete-all-span">Очистить корзину</span>
+              <th className="delete delete-all">
+                <span className="delete delete-all-span">Очистить корзину</span>
               </th>
             </tr>
             {Object.keys(cart).map((key) => (
@@ -140,21 +185,15 @@ const CartList = () => {
             <b>Общая стоимость:</b>
           </p>
           <p className="total-sum-number">
-            {Object.keys(cart).reduce((acc, key) => {
-              return (acc += +goodsObj[key]['cost'] * cart[key]);
-            }, 0)}
+            {getCartData().totalSum}
             {' ₽'}
           </p>
           <p className="total-quantity">
             <b>Всего товаров:</b>
           </p>
-          <p className="total-sum-number">
-            {Object.keys(cart).reduce((acc, key) => {
-              return (acc += cart[key]);
-            }, 0)}
-          </p>
+          <p className="total-sum-number">{counter}</p>
         </div>
-        <form>
+        <form id="cart-data">
           <div className="make-order">
             <div>
               <input
@@ -165,7 +204,6 @@ const CartList = () => {
                 className="make-order-field"
                 placeholder="Введите имя"
                 name="userName"
-                required
               ></input>
             </div>
             <div>
@@ -177,7 +215,6 @@ const CartList = () => {
                 className="make-order-field"
                 placeholder="Введите телефон"
                 name="userTel"
-                required
                 maxLength="16"
               ></input>
             </div>
@@ -200,7 +237,7 @@ const CartList = () => {
           </div>
           <div className="form-buttons">
             <button onClick={closeCart}>Продолжить покупки</button>
-            <button id="submit" type="submit" disabled>
+            <button onClick={sendOrder} id="submit" type="submit">
               Сделать заказ
             </button>
           </div>
