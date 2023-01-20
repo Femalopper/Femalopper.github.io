@@ -20,11 +20,12 @@
   border-radius: 3px;
   padding-bottom: 15px;
   background-color: white;
+  padding: 50px;
 }
 
 .cart-active {
   display: flex;
-  transform: translateY(7%);
+  transform: translateY(5%);
   -webkit-transition: 0.8s;
   -o-transition: 0.8s;
   transition: 0.8s;
@@ -72,6 +73,20 @@
   flex-direction: row;
 }
 
+.close-cart-wrapper {
+  position: relative;
+  left: 900px;
+}
+
+.close-cart {
+  background-color: rgb(249, 249, 249);
+  font-size: 1.2em;
+  color: red;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
 .good-name {
   margin-left: -10px;
 }
@@ -86,7 +101,6 @@
   padding-left: 25px;
 }
 
-.close-cart,
 .make-order
 {
   display: flex;
@@ -160,7 +174,7 @@ input:focus {
   font-size: 0.8em;
 }
 
-.form-buttons button:hover, .payment:hover {
+.close-cart:hover, .form-buttons button:hover, .payment:hover {
   background-color: #e2e2e2;
 }
 

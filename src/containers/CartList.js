@@ -162,6 +162,11 @@ const CartList = () => {
 
   return (
     <div className={`${visibility} cart-container`} id="cart">
+      <div className="close-cart-wrapper">
+        <button className="close-cart" onClick={closeCart}>
+          ×
+        </button>
+      </div>
       <div className="cart">
         <table onClick={cartHandler}>
           <tbody>
@@ -237,7 +242,7 @@ const CartList = () => {
           </div>
           <div className="form-buttons">
             <button onClick={closeCart}>Продолжить покупки</button>
-            <button onClick={sendOrder} id="submit" type="submit">
+            <button onClick={sendOrder} id="submit">
               Сделать заказ
             </button>
           </div>
