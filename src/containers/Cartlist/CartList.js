@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectGoods } from '../store/goodsSlice';
+import { selectGoods } from '../../store/goodsSlice';
 import {
   decrement,
   deleteItem,
@@ -12,9 +12,10 @@ import {
   selectEmptyCart,
   cartIsEmpty,
   selectCounter,
-} from '../store/cartSlice';
-import Cart from '../components/Cart';
-import '../components/Cart.css';
+} from '../../store/cartSlice';
+import Cart from '../../components/Cart/Cart';
+import './CartList.css';
+import '../../components/Cart/Cart.css';
 import Swal from 'sweetalert2';
 
 const CartList = () => {
@@ -180,7 +181,7 @@ const CartList = () => {
               </th>
             </tr>
             {Object.keys(cart).map((key) => (
-              <Cart dataArticul={goodsObj[key]} quantity={cart[key]} />
+              <Cart key={goodsObj[key]} dataArticul={goodsObj[key]} quantity={cart[key]} />
             ))}
           </tbody>
         </table>

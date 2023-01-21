@@ -1,6 +1,5 @@
-import './App.css';
-import CartList from './containers/CartList';
-import GoodsList from './containers/GoodsList';
+import CartList from './containers/Cartlist/CartList';
+import GoodsList from './containers/GoodsList/GoodsList';
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';

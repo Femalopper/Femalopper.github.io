@@ -1,0 +1,12 @@
+.goods-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.goods-field {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 60px;
+}

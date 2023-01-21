@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectShowCart, selectCounter, cartSwitcherVisibility, cartIsEmpty } from '../../store/cartSlice';
@@ -27,7 +26,7 @@ const Header = (props) => {
   return (
     <div className={visibility} id="goods">
       <div className="menu">
-        <div className="menu-logo-nav-cart">
+        <div>
           <div className="logo">Shellac Butik</div>
           <nav>
             <ul>{cat}</ul>

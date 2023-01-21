@@ -3,7 +3,7 @@ import './Goods.css';
 const Goods = (props) => {
   return (
     <div className="goods-block">
-      <img src={require(`../img/${props.data.image}`)} alt="" />
+      <img src={require(`../../img/${props.data.image}`)} alt="" />
       <p className="good-title">{props.data.title}</p>
       <p className="price">{props.data.cost}</p>
       <div className="change-quantity">
@@ -15,7 +15,7 @@ const Goods = (props) => {
           +
         </button>
       </div>
-      <button className="add-to-cart button b-green" data-key={props.data.articul}>
+      <button className="add-to-cart" data-key={props.data.articul}>
         Добавить в корзину
       </button>
     </div>

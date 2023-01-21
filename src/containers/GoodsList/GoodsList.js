@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectGoods } from '../store/goodsSlice';
-import Goods from '../components/Goods';
-import { increment } from '../store/cartSlice';
+import { selectGoods } from '../../store/goodsSlice';
+import Goods from '../../components/Goods/Goods';
+import './GoodsList.css';
+import { increment } from '../../store/cartSlice';
 import Swal from 'sweetalert2';
 
 const GoodsList = () => {

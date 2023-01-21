@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Dancing+Script:wght@700&family=Oswald:wght@200;300;400&family=Secular+One&display=swap');
+
+.cart-good-name {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+}
+
+.good-image {
+  margin-top: 10px;
+  width: 40%;
+}
+
+.good-name {
+  margin-left: -10px;
+}
+
+.minus {
+  margin-right: 14px;
+  background-color: rgb(250, 250, 250);
+  border: 1px solid #e2e2e2;
+  border-radius: 3px;
+  padding: 3px 7px;
+  cursor: pointer;
+}
+
+.plus {
+  margin-left: 14px;
+  background-color: rgb(250, 250, 250);
+  border: 1px solid #e2e2e2;
+  border-radius: 3px;
+  padding: 3px 7px;
+  cursor: pointer;
+}
+
+.delete-item {
+  background-color: rgb(250, 250, 250);
+  border: 1px solid #e2e2e2;
+  border-radius: 3px;
+  padding: 3px 7px;
+  cursor: pointer;
+}
