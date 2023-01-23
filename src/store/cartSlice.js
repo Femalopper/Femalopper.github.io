@@ -52,21 +52,10 @@ export const cartSlice = createSlice({
         state.empty = 'hide';
       }
     },
-    /*
-    writeQuantity: (state, value, code) => {
-      console.log(value.payload);
-      const val = +value.payload;
-      console.log(val);
-      const keyCode = code;
-      if (isNaN(val) || val < 1) {
-        return;
-      } else state.quantity = Math.round(val);
-    },
-    */
   },
 });
 
-export const { increment, decrement, deleteItem, deleteAll, cartSwitcherVisibility, writeQuantity, cartIsEmpty } = cartSlice.actions;
+export const { increment, decrement, deleteItem, deleteAll, cartSwitcherVisibility, cartIsEmpty } = cartSlice.actions;
 export const selectCart = (state) => state.cart.value;
 export const selectCounter = (state) => state.cart.counter;
 export const selectShowCart = (state) => state.cart.showCart;
