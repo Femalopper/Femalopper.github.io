@@ -180,8 +180,8 @@ const CartList = () => {
                 <span className="delete delete-all-span">Очистить корзину</span>
               </th>
             </tr>
-            {Object.keys(cart).map((key) => (
-              <Cart key={goodsObj[key]} dataArticul={goodsObj[key]} quantity={cart[key]} />
+            {Object.keys(cart).map((key, index) => (
+              <Cart key={index} dataArticul={goodsObj[key]} quantity={cart[key]} />
             ))}
           </tbody>
         </table>

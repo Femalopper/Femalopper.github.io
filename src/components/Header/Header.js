@@ -7,9 +7,7 @@ const Header = (props) => {
   const catries = props.data.nav;
   const cat = catries.map((item, index) => (
     <li key={index}>
-      <NavLink to={item.link} className="navlink">
-        {item.text}
-      </NavLink>
+      <NavLink to={item.link}>{item.text}</NavLink>
     </li>
   ));
 
