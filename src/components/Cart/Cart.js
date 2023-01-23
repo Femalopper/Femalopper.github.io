@@ -6,7 +6,7 @@ const Cart = (props) => {
         <td>
           <div className="cart-good-name">
             <div className="good-image">
-              <img src={require(`../../img/${props.dataArticul.image}`)} width="30px" alt="productImage" />
+              <img src={require(`../../img/${props.dataArticul.image}`)} width="45px" alt="productImage" />
             </div>
             <p className="good-name">{props.dataArticul.title}</p>
           </div>
@@ -22,7 +22,7 @@ const Cart = (props) => {
             +
           </button>
         </td>
-        <td>
+        <td className="delete-item-td">
           <button className="delete-item" data-key={props.dataArticul.articul}>
             ×
           </button>

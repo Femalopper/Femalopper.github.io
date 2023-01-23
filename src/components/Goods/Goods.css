@@ -27,6 +27,7 @@
 .good-title {
   font-family: 'Oswald', sans-serif;
   font-weight: 400;
+  text-align: center;
 }
 
 .price {
@@ -125,4 +126,34 @@ input[type='number'] {
 
 .swal2-icon.swal2-success [class^='swal2-success-line'] {
   background-color: #fc81fc !important;
+}
+
+@media screen and (min-width: 1000px) and (max-width: 1400px) {
+  .goods-block {
+    width: 20%;
+  }
+}
+
+@media screen and (min-width: 800px) and (max-width: 1000px) {
+  .goods-block {
+    width: 20%;
+  }
+}
+
+@media screen and (min-width: 600px) and (max-width: 800px) {
+  .goods-block {
+    width: 25%;
+  }
+}
+
+@media screen and (min-width: 400px) and (max-width: 600px) {
+  .goods-block {
+    width: 40%;
+  }
+}
+
+@media screen and (min-width: 200px) and (max-width: 400px) {
+  .goods-block {
+    width: 60%;
+  }
 }

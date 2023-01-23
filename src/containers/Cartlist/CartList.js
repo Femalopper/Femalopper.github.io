@@ -59,16 +59,14 @@ const CartList = () => {
     const t = event.target;
     if (t.classList.contains('minus')) {
       dispatch(decrement(t.getAttribute('data-key')));
-      dispatch(cartIsEmpty());
     } else if (t.classList.contains('plus')) {
       dispatch(increment([t.getAttribute('data-key'), 1]));
     } else if (t.classList.contains('delete') || t.classList.contains('delete')) {
       dispatch(deleteAll());
-      dispatch(cartIsEmpty());
     } else if (t.classList.contains('delete-item')) {
       dispatch(deleteItem(t.getAttribute('data-key')));
-      dispatch(cartIsEmpty());
     }
+    dispatch(cartIsEmpty());
   };
 
   const closeCart = (event) => {
@@ -105,6 +103,8 @@ const CartList = () => {
     event.preventDefault();
     const value = event.target.value;
     const currentId = event.target.getAttribute('id');
+    console.log(currentId);
+    console.log(value);
     if (
       (currentId === 'name' && value.length < 2) ||
       (currentId === 'tel' && !phoneNumber(value)) ||
@@ -158,17 +158,17 @@ const CartList = () => {
       dispatch(cartIsEmpty());
       closeCart();
       cart.style.pointerEvents = 'auto';
-    }, 2500);
+    }, 1500);
   };
 
   return (
     <div className={`${visibility} cart-container`} id="cart">
-      <div className="close-cart-wrapper">
-        <button className="close-cart" onClick={closeCart}>
-          ×
-        </button>
-      </div>
       <div className="cart">
+        <div className="close-cart-wrapper">
+          <button className="close-cart" onClick={closeCart}>
+            ×
+          </button>
+        </div>
         <table onClick={cartHandler}>
           <tbody>
             <tr>
@@ -205,7 +205,7 @@ const CartList = () => {
               <input
                 id="name"
                 type="text"
-                onKeyUp={checkValidity}
+                onInput={checkValidity}
                 onFocus={checkEmptyField}
                 className="make-order-field"
                 placeholder="Введите имя"
@@ -216,7 +216,7 @@ const CartList = () => {
               <input
                 id="tel"
                 type="tel"
-                onKeyUp={checkValidity}
+                onInput={checkValidity}
                 onFocus={checkEmptyField}
                 className="make-order-field"
                 placeholder="Введите телефон"
@@ -228,7 +228,7 @@ const CartList = () => {
               <input
                 id="mail"
                 type="text"
-                onKeyUp={checkValidity}
+                onInput={checkValidity}
                 onFocus={checkEmptyField}
                 className="make-order-field"
                 placeholder="Введите e-mail"
@@ -237,7 +237,7 @@ const CartList = () => {
             </div>
             <div>
               <a href="#">
-                <input className="payment" value="Оплатить" readOnly></input>
+                <input id="payment" className="payment" value="Оплатить" readOnly></input>
               </a>
             </div>
           </div>

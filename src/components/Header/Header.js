@@ -26,11 +26,11 @@ const Header = (props) => {
   return (
     <div className={visibility} id="goods">
       <div className="menu">
-        <div>
-          <div className="logo">Shellac Butik</div>
-          <nav>
-            <ul>{cat}</ul>
-          </nav>
+        <div className="logo">Shellac Butik</div>
+        <nav>
+          <ul>{cat}</ul>
+        </nav>
+        <div className="mini-cart-img-span">
           <img src={require('../../img/cart.png')} className="mini-cart" alt="mini-cart-img" width="30" height="30" onClick={openCart}></img>
           <span className="circle">{cartCounter}</span>
         </div>

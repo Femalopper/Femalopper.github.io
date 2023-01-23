@@ -2,14 +2,16 @@
 
 .cart-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   padding-bottom: 20px;
   padding-top: 20px;
 }
 
 .close-cart-wrapper {
-  position: relative;
-  left: 900px;
+  align-self: flex-end;
+  margin-bottom: 30px;
+  margin-right: -50px;
 }
 
 .close-cart {
@@ -41,7 +43,9 @@
   border-radius: 3px;
   padding-bottom: 15px;
   background-color: white;
-  padding: 50px;
+  padding-bottom: 50px;
+  padding-right: 50px;
+  padding-left: 50px;
 }
 
 .cart-active {
@@ -90,7 +94,6 @@
 
 .good {
   text-align: left;
-  padding-left: 25px;
 }
 
 table {
@@ -125,6 +128,7 @@ th {
 }
 
 .delete-all-span {
+  padding: 3px;
   border-bottom: 2px solid rgb(97, 97, 97);
 }
 
@@ -238,4 +242,140 @@ input:focus {
 
 .incorrect {
   box-shadow: #e94e3c 0 3px 0 0;
+}
+
+@media screen and (min-width: 840px) and (max-width: 1000px) {
+  .cart {
+    width: 720px;
+  }
+}
+
+@media screen and (min-width: 620px) and (max-width: 840px) {
+  .cart {
+    width: 500px;
+  }
+
+  .form-buttons {
+    margin-left: 12px;
+  }
+
+  .form-buttons button {
+    width: 30%;
+    margin-right: 3%;
+  }
+}
+
+@media screen and (min-width: 420px) and (max-width: 620px) {
+  table,
+  td,
+  th,
+  tr,
+  tbody {
+    display: block;
+  }
+
+  td {
+    width: 297px;
+    border: 1px solid rgb(239, 239, 239);
+  }
+
+  th {
+    display: none;
+  }
+
+  .delete-all {
+    width: 299px;
+    display: block;
+  }
+
+  .delete-item-td {
+    background-color: rgb(250, 250, 250);
+  }
+
+  .cart {
+    width: 300px;
+  }
+
+  .cart-active {
+    transform: translateY(2%);
+  }
+
+  .form-buttons {
+    width: 100%;
+    margin-left: 7px;
+  }
+
+  .form-buttons button {
+    width: 48%;
+    margin-right: 2%;
+  }
+
+  .total-result {
+    padding-left: 0;
+    font-size: 0.9em;
+  }
+}
+
+@media screen and (min-width: 270px) and (max-width: 420px) {
+  .cart-container {
+    background-color: white;
+    padding: 0;
+  }
+
+  .cart-active {
+    transform: translateY(0%);
+  }
+
+  table,
+  td,
+  th,
+  tr,
+  tbody {
+    display: block;
+  }
+
+  td {
+    width: 257px;
+    border: 1px solid rgb(239, 239, 239);
+  }
+
+  .cart {
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 260px;
+    box-shadow: none;
+  }
+
+  .close-cart-wrapper {
+    margin-bottom: 20px;
+    margin-right: -10px;
+  }
+
+  th {
+    display: none;
+  }
+
+  .delete-all {
+    width: 258px;
+    display: block;
+  }
+
+  form input {
+    font-size: 0.8em;
+  }
+
+  .form-buttons {
+    width: 100%;
+    margin-left: 7px;
+  }
+
+  .form-buttons button {
+    width: 48%;
+    margin-right: 2%;
+  }
+
+  .total-result {
+    padding-left: 0;
+    font-size: 0.8em;
+  }
 }

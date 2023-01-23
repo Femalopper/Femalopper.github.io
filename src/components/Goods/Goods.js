@@ -1,6 +1,13 @@
 import './Goods.css';
+import React, { useEffect } from 'react';
 
 const Goods = (props) => {
+  const inputQuantity = React.createRef();
+
+  useEffect(() => {
+    inputQuantity.current.addEventListener('wheel', (e) => e.preventDefault(), { passive: false });
+  });
+
   return (
     <div className="goods-block">
       <img src={require(`../../img/${props.data.image}`)} alt="" />
@@ -10,7 +17,15 @@ const Goods = (props) => {
         <button className="minus-quantity" data-key={props.data.articul}>
           -
         </button>
-        <input id={props.data.articul} type="number" defaultValue="1" onKeyDown={props.isValid} onBlur={props.isEmpty}></input>
+        <input
+          id={props.data.articul}
+          type="text"
+          defaultValue="1"
+          ref={inputQuantity}
+          onKeyDown={props.isValid}
+          onBlur={props.isEmpty}
+          maxLength="2"
+        ></input>
         <button className="plus-quantity" data-key={props.data.articul}>
           +
         </button>
