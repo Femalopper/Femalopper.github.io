@@ -81,12 +81,12 @@ const CartList = () => {
   };
 
   const validateEmail = (email) => {
-    let re = /^[\w]{1}[\w-\.]*@[\w-]+\.[a-z]{2,4}$/i;
+    const re = /^[\w]{1}[\w-\.]*@[\w-]+\.[a-z]{2,4}$/i;
     return re.test(String(email).toLowerCase());
   };
 
   const phoneNumber = (number) => {
-    let re = /^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/;
+    const re = /^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/;
     return re.test(number);
   };
 
@@ -221,7 +221,7 @@ const CartList = () => {
                 onInput={checkValidity}
                 onFocus={checkEmptyField}
                 className="make-order-field"
-                placeholder="Введите телефон"
+                placeholder="Введите телефон +7(✗✗✗)✗✗✗-✗✗-✗✗"
                 name="userTel"
                 maxLength="16"
               ></input>
