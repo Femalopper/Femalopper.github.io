@@ -4,7 +4,7 @@ Online shop template is a template for creating online shops.
 
 ### Implemented features
 > product catalog
-> cart
+>> cart
 
 ## Setup
 
@@ -21,11 +21,11 @@ Online shop template is a template for creating online shops.
   ```
 ***
 
-### 2\. Change products description, add new products ###
+### 2\. Change products description and add new products ###
 ```sh
-   cd src/data
+  cd src/data
 
-   code goods.json
+  code goods.json
 ```
 The file goods.json consists of information about products.
 The following fields in the file must be filled:
@@ -35,9 +35,10 @@ The following fields in the file must be filled:
 - image (image of the product)
 - currency
 
+***
 ### 3\. Download products images ###
 ```sh
-   cd src/img
+  cd src/img
 ```
 All the images must be located in the img folder.
 
