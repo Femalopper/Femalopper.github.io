@@ -23,7 +23,7 @@ Online shop template is an adaptive and cross-browser template for fast online s
 
 ### 2\. Change products description and add new products ###
 ```sh
-  cd src/data
+  cd online-shop-template/src/data
 
   code goods.json
 ```
@@ -37,8 +37,17 @@ The following fields in the file must be filled:
 
 ***
 ### 3\. Download products images ###
+
 ```sh
-  cd src/img
+  cd online-shop-template/src/img
 ```
 > All the images must be located in the img folder.
 
+***
+### 4\. Run app ###
+
+```sh
+  cd online-shop-template
+
+  npm start
+```
