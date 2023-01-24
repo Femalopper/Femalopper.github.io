@@ -161,6 +161,8 @@ const CartList = () => {
     }, 1500);
   };
 
+  console.log(goods[0].currency);
+
   return (
     <div className={`${visibility} cart-container`} id="cart">
       <div className="cart">
@@ -173,8 +175,8 @@ const CartList = () => {
           <tbody>
             <tr>
               <th className="good">Товар</th>
-              <th>Цена / ₽</th>
-              <th>Общая цена / ₽</th>
+              <th>{`Цена / ${goods[0].currency}`}</th>
+              <th>{`Общая цена / ${goods[0].currency}`}</th>
               <th>Кол-во</th>
               <th className="delete delete-all">
                 <span className="delete delete-all-span">Очистить корзину</span>
@@ -192,7 +194,7 @@ const CartList = () => {
           </p>
           <p className="total-sum-number">
             {getCartData().totalSum}
-            {' ₽'}
+            {goods[0].currency}
           </p>
           <p className="total-quantity">
             <b>Всего товаров:</b>
