@@ -1,10 +1,10 @@
 ## Description
 
-Online shop template is a template for creating online shops. 
+Online shop template is an adaptive and cross-browser template for fast online shops implementation. 
 
 ### Implemented features
-> product catalog
->> cart
+- dynamic product catalog
+- cart
 
 ## Setup
 
@@ -33,12 +33,12 @@ The following fields in the file must be filled:
 - title (the name of the product)
 - cost (the price of the product)
 - image (image of the product)
-- currency
+- currency (must be the same for all products)
 
 ***
 ### 3\. Download products images ###
 ```sh
   cd src/img
 ```
-All the images must be located in the img folder.
+> All the images must be located in the img folder.
 
