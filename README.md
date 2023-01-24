@@ -20,8 +20,6 @@ Online shop template is an adaptive and cross-browser template for fast online s
    cd online-shop-template
 
    npm ci
-
-   sudo npm link
   ```
 ***
 
