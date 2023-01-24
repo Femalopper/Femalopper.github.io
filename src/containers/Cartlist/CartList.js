@@ -161,8 +161,6 @@ const CartList = () => {
     }, 1500);
   };
 
-  console.log(goods[0].currency);
-
   return (
     <div className={`${visibility} cart-container`} id="cart">
       <div className="cart">

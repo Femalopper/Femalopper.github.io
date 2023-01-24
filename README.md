@@ -6,6 +6,10 @@ Online shop template is an adaptive and cross-browser template for fast online s
 - dynamic product catalog
 - cart
 
+## Animation
+
+![Main functionality](https://github.com/Femalopper/raw/blob/main/images/online-shop-template/Online-shop-template.gif)
+
 ## Setup
 
 ### 1\. Clone project ###
