@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectGoods } from '../../store/goodsSlice';
 import {
@@ -21,21 +21,19 @@ import Swal from 'sweetalert2';
 const CartList = () => {
   const goods = useSelector(selectGoods);
   const cart = useSelector(selectCart);
-  const visibility = useSelector(selectHideCart);
-  const emptyVisibility = useSelector(selectEmptyCart);
+  const cartVisibility = useSelector(selectHideCart);
+  const emptyCartPhrase = useSelector(selectEmptyCart);
   const counter = useSelector(selectCounter);
   const dispatch = useDispatch();
+  const [orderForm, setOrderFormValidity] = useState({
+    name: { validity: null, errorClass: '' },
+    tel: { validity: null, errorClass: '' },
+    mail: { validity: null, errorClass: '' },
+  });
+  const [submitButton, setDisable] = useState(false);
 
   const activateMakeOrderBtn = () => {
-    const name = document.getElementById('name');
-    const tel = document.getElementById('tel');
-    const mail = document.getElementById('mail');
-    const submitButton = document.getElementById('submit');
-    if (name.value.length >= 2 && phoneNumber(tel.value) && validateEmail(mail.value) && counter !== 0) {
-      submitButton.removeAttribute('disabled');
-    } else {
-      submitButton.setAttribute('disabled', true);
-    }
+    orderForm.name.validity && orderForm.tel.validity && orderForm.mail.validity && counter !== 0 ? setDisable(false) : setDisable(true);
   };
 
   useEffect(() => {
@@ -47,7 +45,7 @@ const CartList = () => {
 
   useEffect(() => {
     activateMakeOrderBtn();
-  }, [counter]);
+  }, [counter, orderForm]);
 
   const goodsObj = goods.reduce((acc, item) => {
     acc[item['articul']] = item;
@@ -90,33 +88,27 @@ const CartList = () => {
     return re.test(number);
   };
 
-  const checkEmptyField = (event) => {
-    const value = event.target.value;
-    event.preventDefault();
-    if (!value) {
-      event.target.classList.remove('make-order-field:focus');
-      event.target.classList.add('incorrect');
-    }
-  };
-
   const checkValidity = (event) => {
     event.preventDefault();
     const value = event.target.value;
     const currentId = event.target.getAttribute('id');
-    console.log(currentId);
-    console.log(value);
-    if (
-      (currentId === 'name' && value.length < 2) ||
-      (currentId === 'tel' && !phoneNumber(value)) ||
-      (currentId === 'mail' && !validateEmail(value))
-    ) {
-      event.target.classList.remove('make-order-field:focus');
-      event.target.classList.add('incorrect');
-    } else {
-      event.target.classList.remove('incorrect');
-      event.target.classList.add('make-order-field:focus');
-    }
-    activateMakeOrderBtn();
+    setOrderFormValidity((orderForm) => {
+      let validity;
+      const f1 = () => value.length >= 2;
+      const f2 = () => phoneNumber(value);
+      const f3 = () => validateEmail(value);
+      if (currentId === 'name') {
+        validity = f1();
+      } else if (currentId === 'tel') {
+        validity = f2();
+      } else if (currentId === 'mail') {
+        validity = f3();
+      }
+      return {
+        ...orderForm,
+        [currentId]: { validity, errorClass: validity ? '' : 'incorrect' },
+      };
+    });
   };
 
   const getCartData = () => {
@@ -162,7 +154,7 @@ const CartList = () => {
   };
 
   return (
-    <div className={`${visibility} cart-container`} id="cart">
+    <div className={`${cartVisibility} cart-container`} id="cart">
       <div className="cart">
         <div className="close-cart-wrapper">
           <button className="close-cart" onClick={closeCart}>
@@ -185,7 +177,7 @@ const CartList = () => {
             ))}
           </tbody>
         </table>
-        <div className={`${emptyVisibility} cart-empty`}>Корзина пуста!</div>
+        <div className={`${emptyCartPhrase} cart-empty`}>Корзина пуста!</div>
         <div className="total-result">
           <p>
             <b>Общая стоимость:</b>
@@ -206,8 +198,7 @@ const CartList = () => {
                 id="name"
                 type="text"
                 onInput={checkValidity}
-                onFocus={checkEmptyField}
-                className="make-order-field"
+                className={`make-order-field ${orderForm.name.errorClass}`}
                 placeholder="Введите имя"
                 name="userName"
               ></input>
@@ -217,8 +208,7 @@ const CartList = () => {
                 id="tel"
                 type="tel"
                 onInput={checkValidity}
-                onFocus={checkEmptyField}
-                className="make-order-field"
+                className={`make-order-field ${orderForm.tel.errorClass}`}
                 placeholder="Введите телефон +7(✗✗✗)✗✗✗-✗✗-✗✗"
                 name="userTel"
                 maxLength="16"
@@ -229,8 +219,7 @@ const CartList = () => {
                 id="mail"
                 type="text"
                 onInput={checkValidity}
-                onFocus={checkEmptyField}
-                className="make-order-field"
+                className={`make-order-field ${orderForm.mail.errorClass}`}
                 placeholder="Введите e-mail"
                 name="userEmail"
               ></input>
@@ -243,7 +232,7 @@ const CartList = () => {
           </div>
           <div className="form-buttons">
             <button onClick={closeCart}>Продолжить покупки</button>
-            <button onClick={sendOrder} id="submit">
+            <button onClick={sendOrder} id="submit" disabled={submitButton}>
               Сделать заказ
             </button>
           </div>

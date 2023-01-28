@@ -1,5 +1,4 @@
 const Cart = (props) => {
-  console.log(props);
   return (
     <>
       <tr key={props.quantity * props.dataArticul.cost}>
