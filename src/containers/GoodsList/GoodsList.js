@@ -8,7 +8,6 @@ import Swal from 'sweetalert2';
 
 const GoodsList = () => {
   const goods = useSelector(selectGoods);
-
   const dispatch = useDispatch();
 
   const clickHandler = (event) => {
