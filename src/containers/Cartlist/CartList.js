@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectGoods } from '../../store/goodsSlice';
+import { goodsSwitcherVisibility, selectGoods } from '../../store/goodsSlice';
 import {
   decrement,
   deleteItem,
   increment,
   deleteAll,
   selectCart,
-  selectHideCart,
   cartSwitcherVisibility,
   selectEmptyCart,
   cartIsEmpty,
   selectCounter,
+  selectCartVisibility,
 } from '../../store/cartSlice';
 import Cart from '../../components/Cart/Cart';
 import './CartList.css';
@@ -21,7 +21,7 @@ import Swal from 'sweetalert2';
 const CartList = () => {
   const goods = useSelector(selectGoods);
   const cart = useSelector(selectCart);
-  const cartVisibility = useSelector(selectHideCart);
+  const cartVisibility = useSelector(selectCartVisibility);
   const emptyCartPhrase = useSelector(selectEmptyCart);
   const counter = useSelector(selectCounter);
   const dispatch = useDispatch();
@@ -75,6 +75,7 @@ const CartList = () => {
     animatedWrapper.classList.add('animate-cart-close');
     setTimeout(() => {
       dispatch(cartSwitcherVisibility());
+      dispatch(goodsSwitcherVisibility());
     }, 500);
   };
 
@@ -94,15 +95,15 @@ const CartList = () => {
     const currentId = event.target.getAttribute('id');
     setOrderFormValidity((orderForm) => {
       let validity;
-      const f1 = () => value.length >= 2;
-      const f2 = () => phoneNumber(value);
-      const f3 = () => validateEmail(value);
+      const validateName = () => value.length >= 2;
+      const validateTel = () => phoneNumber(value);
+      const validatePhone = () => validateEmail(value);
       if (currentId === 'name') {
-        validity = f1();
+        validity = validateName();
       } else if (currentId === 'tel') {
-        validity = f2();
+        validity = validateTel();
       } else if (currentId === 'mail') {
-        validity = f3();
+        validity = validatePhone();
       }
       return {
         ...orderForm,

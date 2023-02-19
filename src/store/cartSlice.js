@@ -5,9 +5,8 @@ export const cartSlice = createSlice({
   initialState: {
     value: {},
     counter: 0,
-    showCart: '',
-    hideCart: 'hide',
-    empty: 'hide',
+    cartVisibility: 'hide',
+    emptyCartPhrase: 'hide',
   },
   reducers: {
     increment: (state, data) => {
@@ -37,19 +36,17 @@ export const cartSlice = createSlice({
       state.counter = 0;
     },
     cartSwitcherVisibility: (state) => {
-      if (state.showCart === '') {
-        state.showCart = 'hide';
-        state.hideCart = '';
+      if (state.cartVisibility === 'hide') {
+        state.cartVisibility = '';
       } else {
-        state.showCart = '';
-        state.hideCart = 'hide';
+        state.cartVisibility = 'hide';
       }
     },
     cartIsEmpty: (state) => {
       if (state.counter === 0) {
-        state.empty = '';
+        state.emptyCartPhrase = '';
       } else {
-        state.empty = 'hide';
+        state.emptyCartPhrase = 'hide';
       }
     },
   },
@@ -58,8 +55,7 @@ export const cartSlice = createSlice({
 export const { increment, decrement, deleteItem, deleteAll, cartSwitcherVisibility, cartIsEmpty } = cartSlice.actions;
 export const selectCart = (state) => state.cart.value;
 export const selectCounter = (state) => state.cart.counter;
-export const selectShowCart = (state) => state.cart.showCart;
-export const selectHideCart = (state) => state.cart.hideCart;
-export const selectEmptyCart = (state) => state.cart.empty;
+export const selectCartVisibility = (state) => state.cart.cartVisibility;
+export const selectEmptyCart = (state) => state.cart.emptyCartPhrase;
 
 export default cartSlice.reducer;
