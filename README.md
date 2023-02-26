@@ -1,3 +1,5 @@
+[![Actions Status](https://github.com/Femalopper/online-shop-template/workflows/hexlet-check/badge.svg)](https://github.com/Femalopper/online-shop-template/actions)
+
 ## Description
 
 Online shop template is an adaptive and cross-browser template for fast online shops implementation. 
