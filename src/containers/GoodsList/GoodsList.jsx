@@ -14,6 +14,7 @@ const GoodsList = () => {
     event.preventDefault();
     const t = event.target;
     const currentQuantity = document.getElementById(t.getAttribute('data-key'));
+    console.log(currentQuantity);
 
     if (t.classList.contains('plus-quantity')) {
       const addValue = +currentQuantity.value + 1;
