@@ -1,8 +1,14 @@
+import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectCounter, cartIsEmpty, cartSwitcherVisibility } from '../../store/cartSlice';
+import {
+  selectCounter,
+  cartIsEmpty,
+  cartSwitcherVisibility,
+} from '../../store/cartSlice';
 import './Header.css';
 import { goodsSwitcherVisibility, selectGoodsVisibility } from '../../store/goodsSlice';
+import cart from '../../img/cart.png';
 
 const Header = (props) => {
   const catries = props.data.nav;
@@ -31,7 +37,14 @@ const Header = (props) => {
           <ul>{cat}</ul>
         </nav>
         <div className="mini-cart-img-span">
-          <img src={require('../../img/cart.png')} className="mini-cart" alt="mini-cart-img" width="30" height="30" onClick={openCart}></img>
+          <img
+            src={cart}
+            className="mini-cart"
+            alt="mini-cart-img"
+            width="30"
+            height="30"
+            onClick={openCart}
+          ></img>
           <span className="circle">{cartCounter}</span>
         </div>
       </div>

@@ -17,14 +17,14 @@
         "articul": "00",
         "title": "Стартовый Bluesky",
         "cost": "1500",
-        "image": "5.jpg",
+        "image": "3.jpg",
         "currency": "₽"
     },
     {
         "articul": "11",
         "title": "Начальный Bluesky",
         "cost": "1700",
-        "image": "6.jpg",
+        "image": "4.jpg",
         "currency": "₽"
     }
 ]

@@ -1,3 +1,6 @@
+import React from 'react';
+import require from 'requirejs';
+
 const Cart = (props) => {
   return (
     <>
@@ -5,7 +8,11 @@ const Cart = (props) => {
         <td>
           <div className="cart-good-name">
             <div className="good-image">
-              <img src={require(`../../img/${props.dataArticul.image}`)} width="45px" alt="productImage" />
+              <img
+                src={require(`../../img/${props.dataArticul.image}`)}
+                width="45px"
+                alt="productImage"
+              />
             </div>
             <p className="good-name">{props.dataArticul.title}</p>
           </div>

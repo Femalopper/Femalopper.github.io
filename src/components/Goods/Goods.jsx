@@ -1,4 +1,6 @@
+import React from 'react';
 import './Goods.css';
+import require from 'requirejs';
 
 const Goods = (props) => {
   return (

@@ -33,7 +33,12 @@ const CartList = () => {
   const [submitButton, setDisable] = useState(false);
 
   const activateMakeOrderBtn = () => {
-    orderForm.name.validity && orderForm.tel.validity && orderForm.mail.validity && counter !== 0 ? setDisable(false) : setDisable(true);
+    orderForm.name.validity &&
+    orderForm.tel.validity &&
+    orderForm.mail.validity &&
+    counter !== 0
+      ? setDisable(false)
+      : setDisable(true);
   };
 
   useEffect(() => {
@@ -80,12 +85,13 @@ const CartList = () => {
   };
 
   const validateEmail = (email) => {
-    const re = /^[\w]{1}[\w-\.]*@[\w-]+\.[a-z]{2,4}$/i;
+    const re = /^[\w]{1}[\w-.]*@[\w-]+\.[a-z]{2,4}$/i;
     return re.test(String(email).toLowerCase());
   };
 
   const phoneNumber = (number) => {
-    const re = /^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/;
+    const re =
+      /^(\+7|7|8)?[\s-]?\(?[489][0-9]{2}\)?[\s-]?[0-9]{3}[\s-]?[0-9]{2}[\s-]?[0-9]{2}$/;
     return re.test(number);
   };
 
@@ -118,7 +124,10 @@ const CartList = () => {
       totalQuantity: counter,
       totalSum: 0,
     };
-    cartData.items = Object.keys(cart).map((key) => ({ item: goodsObj[key], quantity: cart[key] }));
+    cartData.items = Object.keys(cart).map((key) => ({
+      item: goodsObj[key],
+      quantity: cart[key],
+    }));
     cartData.totalSum = cartData.items.reduce((acc, { item, quantity }) => {
       acc += +item['cost'] * quantity;
       return acc;

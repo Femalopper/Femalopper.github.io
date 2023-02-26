@@ -34,18 +34,20 @@ The following fields in the file must be filled:
 - articul (unique item number of the product)
 - title (the name of the product)
 - cost (the price of the product)
-- image (image of the product)
+- image (name of the image)
 - currency (must be the same for all products)
 
 ***
-### 3\. Download products images ###
+### 3\. Download new products images ###
+
+> All the images must be located in the img folder. Do not move img folder!
 
 ```sh
   cd online-shop-template/src/img
 ```
-> All the images must be located in the img folder.
 
 ***
+
 ### 4\. Run app ###
 
 ```sh

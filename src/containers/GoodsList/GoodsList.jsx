@@ -14,7 +14,6 @@ const GoodsList = () => {
     event.preventDefault();
     const t = event.target;
     const currentQuantity = document.getElementById(t.getAttribute('data-key'));
-    console.log(currentQuantity);
 
     if (t.classList.contains('plus-quantity')) {
       const addValue = +currentQuantity.value + 1;
@@ -24,7 +23,10 @@ const GoodsList = () => {
       if (reduceValue > 0) {
         currentQuantity.value = reduceValue;
       }
-    } else if (t.classList.contains('add-to-cart') && (currentQuantity.value === '0' || currentQuantity.value === '00')) {
+    } else if (
+      t.classList.contains('add-to-cart') &&
+      (currentQuantity.value === '0' || currentQuantity.value === '00')
+    ) {
       event.preventDefault();
       currentQuantity.setAttribute('style', 'border: 1px solid red');
       setTimeout(() => {
@@ -65,7 +67,12 @@ const GoodsList = () => {
     <div className="goods-wrapper">
       <div className="goods-field" onClick={clickHandler}>
         {goods.map((item) => (
-          <Goods data={item} key={item.articul} isValid={inputIsValid} isEmpty={inputIsEmpty} />
+          <Goods
+            data={item}
+            key={item.articul}
+            isValid={inputIsValid}
+            isEmpty={inputIsEmpty}
+          />
         ))}
       </div>
     </div>

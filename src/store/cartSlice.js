@@ -52,7 +52,14 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { increment, decrement, deleteItem, deleteAll, cartSwitcherVisibility, cartIsEmpty } = cartSlice.actions;
+export const {
+  increment,
+  decrement,
+  deleteItem,
+  deleteAll,
+  cartSwitcherVisibility,
+  cartIsEmpty,
+} = cartSlice.actions;
 export const selectCart = (state) => state.cart.value;
 export const selectCounter = (state) => state.cart.counter;
 export const selectCartVisibility = (state) => state.cart.cartVisibility;
