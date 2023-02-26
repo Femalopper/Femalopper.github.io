@@ -1,4 +1,4 @@
-[![Actions Status](https://github.com/Femalopper/online-shop-template/workflows/hexlet-check/badge.svg)](https://github.com/Femalopper/online-shop-template/actions)
+[![Actions Status](https://github.com/Femalopper/online-shop-template/workflows/eslint-check/badge.svg)](https://github.com/Femalopper/online-shop-template/actions)
 
 ## Description
 
