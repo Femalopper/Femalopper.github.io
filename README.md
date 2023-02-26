@@ -1,4 +1,4 @@
-![Actions Status](https://github.com/Femalopper/online-shop-template/actions/workflows/eslint-check.yml/badge.svg?branch=main)
+[![Actions Status](https://github.com/Femalopper/online-shop-template/workflows/eslint-check/badge.svg?branch=main)](https://github.com/Femalopper/online-shop-template/actions)
 
 ## Description
 
