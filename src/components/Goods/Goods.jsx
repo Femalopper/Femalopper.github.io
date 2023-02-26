@@ -8,7 +8,7 @@ const Goods = (props) => {
       <img src={require(`../../img/${props.data.image}`)} alt="" />
       <p className="good-title">{props.data.title}</p>
       <p className="price">
-        {props.data.cost}
+        {props.data.cost
         {props.data.currency}
       </p>
       <div className="change-quantity">
