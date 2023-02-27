@@ -26,13 +26,11 @@ const Goods = (props) => {
   }
 
   const plusHandler = (event) => {
-    event.preventDefault();
     const { currentId, value } = handler(event.target);
     dispatch(changeGoodsQuantity({ currentId, value: value + 1 }));
   };
 
   const minusHandler = (event) => {
-    event.preventDefault();
     const { currentId, value } = handler(event.target);
     if (value > 1) {
       dispatch(changeGoodsQuantity({ currentId, value: value - 1 }));
@@ -40,7 +38,6 @@ const Goods = (props) => {
   };
 
   const addToCartHandler = (event) => {
-    event.preventDefault();
     const { currentId, value } = handler(event.target);
     if (value !== 0) {
       const data = [event.target.getAttribute('data-key'), value];

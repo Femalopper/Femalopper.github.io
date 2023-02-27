@@ -38,34 +38,12 @@ const CartForm = (props) => {
     <>
       <form id="cart-data">
         <div className="make-order">
-          <div>
-            <input
-              type="text"
-              onInput={checkValidity}
-              className={`make-order-field ${orderForm.name.errorClass}`}
-              placeholder="Введите имя"
-              name="name"
-            ></input>
-          </div>
-          <div>
-            <input
-              type="tel"
-              onInput={checkValidity}
-              className={`make-order-field ${orderForm.tel.errorClass}`}
-              placeholder="Введите телефон +7(✗✗✗)✗✗✗-✗✗-✗✗"
-              name="tel"
-              maxLength="16"
-            ></input>
-          </div>
-          <div>
-            <input
-              type="text"
-              onInput={checkValidity}
-              className={`make-order-field ${orderForm.mail.errorClass}`}
-              placeholder="Введите e-mail"
-              name="mail"
-            ></input>
-          </div>
+            {Object.keys(orderForm).map((key) =>
+                <div key={key}><input type={key === "tel" ? "tel" : "text"} onInput={checkValidity}
+                className={`make-order-field ${orderForm[key].errorClass}`} name={key}
+                placeholder={key === "tel" ? "Введите телефон +7(✗✗✗)✗✗✗-✗✗-✗✗" : 
+                key === "name" ? "Введите имя" : "Введите e-mail"} /></div>
+                )}
           <div>
             <a href="#">
               <input id="payment" className="payment" value="Оплатить" readOnly />
