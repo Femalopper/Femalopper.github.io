@@ -3,12 +3,12 @@ import { NavLink, Outlet } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   selectCounter,
-  cartIsEmpty,
-  cartSwitcherVisibility,
+  cartStateSwitcher,
 } from '../../store/cartSlice';
 import './Header.css';
-import { goodsSwitcherVisibility, selectGoodsVisibility } from '../../store/goodsSlice';
+import { goodsStateSwitcher, selectGoodsState} from '../../store/goodsSlice';
 import cart from '../../img/cart.png';
+import classNames from 'classnames';
 
 const Header = (props) => {
   const catries = props.data.nav;
@@ -18,19 +18,21 @@ const Header = (props) => {
     </li>
   ));
 
-  const goodsVisibility = useSelector(selectGoodsVisibility);
+  const goodsState = useSelector(selectGoodsState);
   const cartCounter = useSelector(selectCounter);
   const dispatch = useDispatch();
 
   const openCart = (event) => {
     event.preventDefault();
-    dispatch(goodsSwitcherVisibility());
-    dispatch(cartSwitcherVisibility());
-    dispatch(cartIsEmpty());
+    dispatch(goodsStateSwitcher("closed"));
+    dispatch(cartStateSwitcher("openning"));
+    setTimeout(() => {
+      dispatch(cartStateSwitcher("opened"));
+    });
   };
 
   return (
-    <div className={goodsVisibility} id="goods">
+    <div className={classNames({ "hide": goodsState === "closed"})} id="goods">
       <div className="menu">
         <div className="logo">Shellac Butik</div>
         <nav>

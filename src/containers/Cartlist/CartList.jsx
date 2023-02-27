@@ -1,28 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { goodsSwitcherVisibility, selectGoods } from '../../store/goodsSlice';
+import { goodsStateSwitcher, selectGoods } from '../../store/goodsSlice';
 import {
   decrement,
   deleteItem,
   increment,
   deleteAll,
   selectCart,
-  cartSwitcherVisibility,
-  selectEmptyCart,
-  cartIsEmpty,
+  cartStateSwitcher,
   selectCounter,
-  selectCartVisibility,
+  selectCartState,
 } from '../../store/cartSlice';
 import Cart from '../../components/Cart/Cart';
 import './CartList.css';
 import '../../components/Cart/Cart.css';
 import Swal from 'sweetalert2';
+import classNames from 'classnames';
 
 const CartList = () => {
   const goods = useSelector(selectGoods);
   const cart = useSelector(selectCart);
-  const cartVisibility = useSelector(selectCartVisibility);
-  const emptyCartPhrase = useSelector(selectEmptyCart);
+  const cartState = useSelector(selectCartState);
   const counter = useSelector(selectCounter);
   const dispatch = useDispatch();
   const [orderForm, setOrderFormValidity] = useState({
@@ -31,6 +29,7 @@ const CartList = () => {
     mail: { validity: null, errorClass: '' },
   });
   const [submitButton, setDisable] = useState(false);
+  const cartRef = React.createRef();
 
   const activateMakeOrderBtn = () => {
     orderForm.name.validity &&
@@ -42,13 +41,6 @@ const CartList = () => {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      const animatedWrapper = document.querySelector('#cart');
-      animatedWrapper.classList.add('cart-active');
-    });
-  });
-
-  useEffect(() => {
     activateMakeOrderBtn();
   }, [counter, orderForm]);
 
@@ -58,29 +50,35 @@ const CartList = () => {
   }, {});
 
   const cartHandler = (event) => {
-    event.preventDefault();
     const t = event.target;
-    if (t.classList.contains('minus')) {
-      dispatch(decrement(t.getAttribute('data-key')));
-    } else if (t.classList.contains('plus')) {
-      dispatch(increment([t.getAttribute('data-key'), 1]));
-    } else if (t.classList.contains('delete') || t.classList.contains('delete')) {
+    const click = t.dataset.click;
+
+    switch (click) {
+      case "minus": 
+      dispatch(decrement(t.dataset.key));
+      break;
+      case "plus":
+      dispatch(increment([t.dataset.key, 1]));
+      break;
+      case "delete":
       dispatch(deleteAll());
-    } else if (t.classList.contains('delete-item')) {
-      dispatch(deleteItem(t.getAttribute('data-key')));
+      break;
+      case "delete-item":
+      dispatch(deleteItem(t.dataset.key));
+      break;
+      default:
+        break;
     }
-    dispatch(cartIsEmpty());
   };
 
   const closeCart = (event) => {
     if (event) {
       event.preventDefault();
     }
-    const animatedWrapper = document.querySelector('#cart');
-    animatedWrapper.classList.add('animate-cart-close');
+    dispatch(cartStateSwitcher("closing"));
     setTimeout(() => {
-      dispatch(cartSwitcherVisibility());
-      dispatch(goodsSwitcherVisibility());
+      dispatch(cartStateSwitcher("closed"));
+      dispatch(goodsStateSwitcher("opened"));
     }, 500);
   };
 
@@ -152,19 +150,21 @@ const CartList = () => {
       method: 'POST',
       body: { productsData: getCartData(), userData: params },
     });
-
-    const cart = document.querySelector('#cart');
-    cart.style.pointerEvents = 'none';
+  
+    cartRef.current.style.pointerEvents = 'none';
     setTimeout(() => {
       dispatch(deleteAll());
-      dispatch(cartIsEmpty());
       closeCart();
-      cart.style.pointerEvents = 'auto';
+      cartRef.current.style.pointerEvents = 'auto';
     }, 1500);
   };
 
   return (
-    <div className={`${cartVisibility} cart-container`} id="cart">
+    <div className={classNames({ 
+      "hide": cartState === "closed",
+      "cart-active": cartState === "opened",
+      "animate-cart-close": cartState === "closing",
+      }, "cart-container")} id="cart" ref={cartRef}>
       <div className="cart">
         <div className="close-cart-wrapper">
           <button className="close-cart" onClick={closeCart}>
@@ -178,8 +178,8 @@ const CartList = () => {
               <th>{`Цена / ${goods[0].currency}`}</th>
               <th>{`Общая цена / ${goods[0].currency}`}</th>
               <th>Кол-во</th>
-              <th className="delete delete-all">
-                <span className="delete delete-all-span">Очистить корзину</span>
+              <th className="delete delete-all" data-click="delete">
+                <span className="delete delete-all-span" data-click="delete">Очистить корзину</span>
               </th>
             </tr>
             {Object.keys(cart).map((key, index) => (
@@ -187,7 +187,7 @@ const CartList = () => {
             ))}
           </tbody>
         </table>
-        <div className={`${emptyCartPhrase} cart-empty`}>Корзина пуста!</div>
+        <div className={classNames({ "hide": counter !== 0 }, "cart-empty")}>Корзина пуста!</div>
         <div className="total-result">
           <p>
             <b>Общая стоимость:</b>

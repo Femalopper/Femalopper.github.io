@@ -20,16 +20,16 @@ const Cart = (props) => {
         <td>{props.dataArticul.cost}</td>
         <td>{props.quantity * +props.dataArticul.cost}</td>
         <td>
-          <button className="minus" data-key={props.dataArticul.articul}>
+          <button className="minus" data-key={props.dataArticul.articul} data-click="minus">
             -
           </button>
           {props.quantity}
-          <button className="plus" data-key={props.dataArticul.articul}>
+          <button className="plus" data-key={props.dataArticul.articul} data-click="plus">
             +
           </button>
         </td>
         <td className="delete-item-td">
-          <button className="delete-item" data-key={props.dataArticul.articul}>
+          <button className="delete-item" data-key={props.dataArticul.articul} data-click="delete-item">
             ×
           </button>
         </td>

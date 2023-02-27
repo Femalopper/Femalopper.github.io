@@ -5,21 +5,20 @@ export const goodsSlice = createSlice({
   name: 'goods',
   initialState: {
     goods: goodsArr,
-    goodsVisibility: '',
+    goodsProcess: {
+      goodsState: 'opened',
+    },
   },
   reducers: {
-    goodsSwitcherVisibility: (state) => {
-      if (state.goodsVisibility === '') {
-        state.goodsVisibility = 'hide';
-      } else {
-        state.goodsVisibility = '';
-      }
+    goodsStateSwitcher: (state, data) => {
+      const process = data.payload;
+      state.goodsProcess.goodsState = process;
     },
   },
 });
 
-export const { goodsSwitcherVisibility } = goodsSlice.actions;
+export const { goodsStateSwitcher } = goodsSlice.actions;
 export const selectGoods = (state) => state.goods.goods;
-export const selectGoodsVisibility = (state) => state.goods.goodsVisibility;
+export const selectGoodsState = (state) => state.goods.goodsProcess.goodsState;
 
 export default goodsSlice.reducer;
