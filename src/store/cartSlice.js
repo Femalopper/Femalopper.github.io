@@ -5,11 +5,15 @@ export const cartSlice = createSlice({
   initialState: {
     cartGoods: {},
     counter: 0,
-    totalSum: 0,
     cartProcess: {
       cartState: 'closed',
     },
-    consumerData: {},
+    submitBtnVisibility: true,
+    consumerData: {
+      name: { validity: false, errorClass: '' },
+      tel: { validity: false, errorClass: '' },
+      mail: { validity: false, errorClass: '' },
+    },
   },
   reducers: {
     increment: (state, data) => {
@@ -43,13 +47,32 @@ export const cartSlice = createSlice({
       const process = data.payload;
       state.cartProcess.cartState = process;
     },
+    submitBtnSwitcher: (state, data) => {
+      state.submitBtnVisibility = data.payload;
+    },
+    setConsumerData: (state, data) => {
+      const obj = data.payload;
+      console.log(obj);
+      const currentField = obj.currentId;
+      state.consumerData[currentField].errorClass = obj.validity ? '' : 'incorrect';
+      state.consumerData[currentField].validity = obj.validity;
+    },
   },
 });
 
-export const { increment, decrement, deleteItem, deleteAll, cartStateSwitcher } =
-  cartSlice.actions;
+export const {
+  increment,
+  decrement,
+  deleteItem,
+  deleteAll,
+  cartStateSwitcher,
+  submitBtnSwitcher,
+  setConsumerData,
+} = cartSlice.actions;
 export const selectCart = (state) => state.cart.cartGoods;
 export const selectCounter = (state) => state.cart.counter;
 export const selectCartState = (state) => state.cart.cartProcess.cartState;
+export const selectConsumerData = (state) => state.cart.consumerData;
+export const selectSubmitBtnVisibility = (state) => state.cart.submitBtnVisibility;
 
 export default cartSlice.reducer;

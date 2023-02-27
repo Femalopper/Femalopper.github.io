@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { goodsStateSwitcher, selectGoods } from '../../store/goodsSlice';
 import {
@@ -10,12 +10,15 @@ import {
   cartStateSwitcher,
   selectCounter,
   selectCartState,
+  submitBtnSwitcher,
 } from '../../store/cartSlice';
 import Cart from '../../components/Cart/Cart';
 import './CartList.css';
 import '../../components/Cart/Cart.css';
 import Swal from 'sweetalert2';
 import classNames from 'classnames';
+import CartForm from './CartForm/CartForm';
+import { setConsumerData, selectConsumerData } from '../../store/cartSlice';
 
 const CartList = () => {
   const goods = useSelector(selectGoods);
@@ -23,21 +26,17 @@ const CartList = () => {
   const cartState = useSelector(selectCartState);
   const counter = useSelector(selectCounter);
   const dispatch = useDispatch();
-  const [orderForm, setOrderFormValidity] = useState({
-    name: { validity: null, errorClass: '' },
-    tel: { validity: null, errorClass: '' },
-    mail: { validity: null, errorClass: '' },
-  });
-  const [submitButton, setDisable] = useState(false);
+  const orderForm = useSelector(selectConsumerData);
   const cartRef = React.createRef();
 
   const activateMakeOrderBtn = () => {
-    orderForm.name.validity &&
+    if 
+    (orderForm.name.validity &&
     orderForm.tel.validity &&
     orderForm.mail.validity &&
-    counter !== 0
-      ? setDisable(false)
-      : setDisable(true);
+    counter !== 0) {
+      dispatch(submitBtnSwitcher(false))
+    } else dispatch(submitBtnSwitcher(true))
   };
 
   useEffect(() => {
@@ -97,7 +96,6 @@ const CartList = () => {
     event.preventDefault();
     const value = event.target.value;
     const currentId = event.target.getAttribute('id');
-    setOrderFormValidity((orderForm) => {
       let validity;
       const validateName = () => value.length >= 2;
       const validateTel = () => phoneNumber(value);
@@ -109,11 +107,7 @@ const CartList = () => {
       } else if (currentId === 'mail') {
         validity = validatePhone();
       }
-      return {
-        ...orderForm,
-        [currentId]: { validity, errorClass: validity ? '' : 'incorrect' },
-      };
-    });
+      dispatch(setConsumerData({ validity, currentId }));
   };
 
   const getCartData = () => {
@@ -201,52 +195,7 @@ const CartList = () => {
           </p>
           <p className="total-sum-number">{counter}</p>
         </div>
-        <form id="cart-data">
-          <div className="make-order">
-            <div>
-              <input
-                id="name"
-                type="text"
-                onInput={checkValidity}
-                className={`make-order-field ${orderForm.name.errorClass}`}
-                placeholder="Введите имя"
-                name="userName"
-              ></input>
-            </div>
-            <div>
-              <input
-                id="tel"
-                type="tel"
-                onInput={checkValidity}
-                className={`make-order-field ${orderForm.tel.errorClass}`}
-                placeholder="Введите телефон +7(✗✗✗)✗✗✗-✗✗-✗✗"
-                name="userTel"
-                maxLength="16"
-              ></input>
-            </div>
-            <div>
-              <input
-                id="mail"
-                type="text"
-                onInput={checkValidity}
-                className={`make-order-field ${orderForm.mail.errorClass}`}
-                placeholder="Введите e-mail"
-                name="userEmail"
-              ></input>
-            </div>
-            <div>
-              <a href="#">
-                <input id="payment" className="payment" value="Оплатить" readOnly></input>
-              </a>
-            </div>
-          </div>
-          <div className="form-buttons">
-            <button onClick={closeCart}>Продолжить покупки</button>
-            <button onClick={sendOrder} id="submit" disabled={submitButton}>
-              Сделать заказ
-            </button>
-          </div>
-        </form>
+        <CartForm isValid={checkValidity} send={sendOrder} close={closeCart}/>
       </div>
     </div>
   );
