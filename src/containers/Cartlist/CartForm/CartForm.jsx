@@ -4,12 +4,17 @@ import {
   selectSubmitBtnVisibility,
   selectConsumerData,
   setConsumerData,
+  selectCart,
+  cartStateSwitcher
 } from '../../../store/cartSlice';
+import { goodsStateSwitcher } from '../../../store/goodsSlice';
+import Swal from 'sweetalert2';
 
-const CartForm = (props) => {
+const CartForm = React.forwardRef((props, ref) => {
   const submitButton = useSelector(selectSubmitBtnVisibility);
   const orderForm = useSelector(selectConsumerData);
   const dispatch = useDispatch();
+  const cart = useSelector(selectCart);
 
   const validateEmail = (email) => {
     const re = /^[\w]{1}[\w-.]*@[\w-]+\.[a-z]{2,4}$/i;
@@ -34,9 +39,36 @@ const CartForm = (props) => {
     dispatch(setConsumerData({ validity, currentId }));
   };
 
+  const sendOrder = (event) => {
+    event.preventDefault();
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Заказ оформлен! Ожидайте звонка.',
+      showConfirmButton: false,
+      timer: 1500,
+      width: 300,
+    });
+
+    const form = document.getElementById('cart-data');
+    
+    fetch('#', {
+      method: 'POST',
+      body: { productsData: cart, userData: [...new FormData(form)] },
+    });
+    console.log(ref)
+    ref.current.style.pointerEvents = 'none';
+    setTimeout(() => {
+      dispatch(props.deleteAll());
+      dispatch(cartStateSwitcher('sent order'));
+      ref.current.style.pointerEvents = 'auto';
+      dispatch(goodsStateSwitcher('opened'));
+    }, 1500);
+  };
+
   return (
     <>
-      <form id="cart-data">
+      <form id="cart-data" onSubmit={sendOrder}>
         <div className="make-order">
             {Object.keys(orderForm).map((key) =>
                 <div key={key}><input type={key === "tel" ? "tel" : "text"} onInput={checkValidity}
@@ -52,13 +84,14 @@ const CartForm = (props) => {
         </div>
         <div className="form-buttons">
           <button onClick={props.close}>Продолжить покупки</button>
-          <button onClick={props.send} id="submit" disabled={submitButton}>
+          <button id="submit" disabled={submitButton}>
             Сделать заказ
           </button>
         </div>
       </form>
     </>
   );
-};
+});
 
+CartForm.displayName = 'CartForm';
 export default CartForm;

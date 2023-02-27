@@ -37,10 +37,16 @@ const Goods = (props) => {
     }
   };
 
+  const goodsObj = goods.reduce((acc, item) => {
+    acc[item['articul']] = item;
+    return acc;
+  }, {});
+
   const addToCartHandler = (event) => {
     const { currentId, value } = handler(event.target);
+
     if (value !== 0) {
-      const data = [event.target.getAttribute('data-key'), value];
+      const data = [goodsObj[event.target.dataset.key], value];
       dispatch(increment(data));
       dispatch(changeGoodsQuantity({ currentId, value: 1 }))
       Swal.fire({

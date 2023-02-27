@@ -1,21 +1,21 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { goodsStateSwitcher, selectGoods } from '../../store/goodsSlice';
+import { selectGoods, goodsStateSwitcher } from '../../store/goodsSlice';
 import {
   decrement,
   deleteItem,
   increment,
   deleteAll,
   selectCart,
-  cartStateSwitcher,
   selectCounter,
   selectCartState,
   submitBtnSwitcher,
+  selectTotalSum,
+  cartStateSwitcher
 } from '../../store/cartSlice';
 import Cart from '../../components/Cart/Cart';
 import './CartList.css';
 import '../../components/Cart/Cart.css';
-import Swal from 'sweetalert2';
 import classNames from 'classnames';
 import CartForm from './CartForm/CartForm';
 import { selectConsumerData } from '../../store/cartSlice';
@@ -28,6 +28,7 @@ const CartList = () => {
   const dispatch = useDispatch();
   const orderForm = useSelector(selectConsumerData);
   const cartRef = React.createRef();
+  const totalSum = useSelector(selectTotalSum);
 
   const activateMakeOrderBtn = () => {
     const { name, tel, mail } = orderForm;
@@ -54,7 +55,7 @@ const CartList = () => {
         dispatch(decrement(t.dataset.key));
         break;
       case 'plus':
-        dispatch(increment([t.dataset.key, 1]));
+        dispatch(increment([goodsObj[t.dataset.key], 1]));
         break;
       case 'delete':
         dispatch(deleteAll());
@@ -68,57 +69,12 @@ const CartList = () => {
   };
 
   const closeCart = (event) => {
-    if (event) {
-      event.preventDefault();
-    }
+    event.preventDefault();
     dispatch(cartStateSwitcher('closing'));
     setTimeout(() => {
       dispatch(cartStateSwitcher('closed'));
       dispatch(goodsStateSwitcher('opened'));
     }, 500);
-  };
-
-  const getCartData = () => {
-    const cartData = {
-      items: [],
-      totalQuantity: counter,
-      totalSum: 0,
-    };
-    cartData.items = Object.keys(cart).map((key) => ({
-      item: goodsObj[key],
-      quantity: cart[key],
-    }));
-    cartData.totalSum = cartData.items.reduce((acc, { item, quantity }) => {
-      acc += +item['cost'] * quantity;
-      return acc;
-    }, 0);
-    return cartData;
-  };
-
-  const sendOrder = (event) => {
-    event.preventDefault();
-    Swal.fire({
-      position: 'center',
-      icon: 'success',
-      title: 'Заказ оформлен! Ожидайте звонка.',
-      showConfirmButton: false,
-      timer: 1500,
-      width: 300,
-    });
-
-    const form = document.getElementById('cart-data');
-    const params = new FormData(form);
-    fetch('#', {
-      method: 'POST',
-      body: { productsData: getCartData(), userData: params },
-    });
-
-    cartRef.current.style.pointerEvents = 'none';
-    setTimeout(() => {
-      dispatch(deleteAll());
-      closeCart();
-      cartRef.current.style.pointerEvents = 'auto';
-    }, 1500);
   };
 
   return (
@@ -127,7 +83,7 @@ const CartList = () => {
         {
           hide: cartState === 'closed',
           'cart-active': cartState === 'opened',
-          'animate-cart-close': cartState === 'closing',
+          'animate-cart-close': cartState === 'closing' || cartState === 'sent order',
         },
         'cart-container'
       )}
@@ -154,7 +110,7 @@ const CartList = () => {
               </th>
             </tr>
             {Object.keys(cart).map((key, index) => (
-              <Cart key={index} dataArticul={goodsObj[key]} quantity={cart[key]} />
+              <Cart key={index} dataArticul={goodsObj[key]} quantity={cart[key].quantity} />
             ))}
           </tbody>
         </table>
@@ -164,7 +120,7 @@ const CartList = () => {
             <b>Общая стоимость:</b>
           </p>
           <p className="total-sum-number">
-            {getCartData().totalSum}
+            {totalSum}
             {goods[0].currency}
           </p>
           <p className="total-quantity">
@@ -172,7 +128,7 @@ const CartList = () => {
           </p>
           <p className="total-sum-number">{counter}</p>
         </div>
-        <CartForm send={sendOrder} close={closeCart} />
+        <CartForm close={closeCart} deleteAll={deleteAll} ref={cartRef}/>
       </div>
     </div>
   );

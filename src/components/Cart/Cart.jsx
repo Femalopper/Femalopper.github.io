@@ -21,7 +21,7 @@ const Cart = (props) => {
           </div>
         </td>
         <td>{cost}</td>
-        <td>{quantity * +cost}</td>
+        <td>{quantity * cost}</td>
         <td>
           <button className="minus" data-key={articul} data-click="minus">-</button>
           {quantity}
