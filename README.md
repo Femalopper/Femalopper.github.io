@@ -1,5 +1,4 @@
 [![Actions Status](https://github.com/Femalopper/online-shop-template/workflows/eslint-check/badge.svg?branch=main)](https://github.com/Femalopper/online-shop-template/actions)
-
 [![Maintainability](https://api.codeclimate.com/v1/badges/22c27bb0af17a79a3931/maintainability)](https://codeclimate.com/github/Femalopper/online-shop-template/maintainability)
 
 ## Description
