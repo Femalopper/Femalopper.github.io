@@ -18,7 +18,7 @@ import '../../components/Cart/Cart.css';
 import Swal from 'sweetalert2';
 import classNames from 'classnames';
 import CartForm from './CartForm/CartForm';
-import { setConsumerData, selectConsumerData } from '../../store/cartSlice';
+import { selectConsumerData } from '../../store/cartSlice';
 
 const CartList = () => {
   const goods = useSelector(selectGoods);
@@ -30,13 +30,10 @@ const CartList = () => {
   const cartRef = React.createRef();
 
   const activateMakeOrderBtn = () => {
-    if 
-    (orderForm.name.validity &&
-    orderForm.tel.validity &&
-    orderForm.mail.validity &&
-    counter !== 0) {
-      dispatch(submitBtnSwitcher(false))
-    } else dispatch(submitBtnSwitcher(true))
+    const { name, tel, mail } = orderForm;
+    if (name.validity && tel.validity && mail.validity && counter !== 0) {
+      dispatch(submitBtnSwitcher(false));
+    } else dispatch(submitBtnSwitcher(true));
   };
 
   useEffect(() => {
@@ -53,18 +50,18 @@ const CartList = () => {
     const click = t.dataset.click;
 
     switch (click) {
-      case "minus": 
-      dispatch(decrement(t.dataset.key));
-      break;
-      case "plus":
-      dispatch(increment([t.dataset.key, 1]));
-      break;
-      case "delete":
-      dispatch(deleteAll());
-      break;
-      case "delete-item":
-      dispatch(deleteItem(t.dataset.key));
-      break;
+      case 'minus':
+        dispatch(decrement(t.dataset.key));
+        break;
+      case 'plus':
+        dispatch(increment([t.dataset.key, 1]));
+        break;
+      case 'delete':
+        dispatch(deleteAll());
+        break;
+      case 'delete-item':
+        dispatch(deleteItem(t.dataset.key));
+        break;
       default:
         break;
     }
@@ -74,40 +71,11 @@ const CartList = () => {
     if (event) {
       event.preventDefault();
     }
-    dispatch(cartStateSwitcher("closing"));
+    dispatch(cartStateSwitcher('closing'));
     setTimeout(() => {
-      dispatch(cartStateSwitcher("closed"));
-      dispatch(goodsStateSwitcher("opened"));
+      dispatch(cartStateSwitcher('closed'));
+      dispatch(goodsStateSwitcher('opened'));
     }, 500);
-  };
-
-  const validateEmail = (email) => {
-    const re = /^[\w]{1}[\w-.]*@[\w-]+\.[a-z]{2,4}$/i;
-    return re.test(String(email).toLowerCase());
-  };
-
-  const phoneNumber = (number) => {
-    const re =
-      /^(\+7|7|8)?[\s-]?\(?[489][0-9]{2}\)?[\s-]?[0-9]{3}[\s-]?[0-9]{2}[\s-]?[0-9]{2}$/;
-    return re.test(number);
-  };
-
-  const checkValidity = (event) => {
-    event.preventDefault();
-    const value = event.target.value;
-    const currentId = event.target.getAttribute('id');
-      let validity;
-      const validateName = () => value.length >= 2;
-      const validateTel = () => phoneNumber(value);
-      const validatePhone = () => validateEmail(value);
-      if (currentId === 'name') {
-        validity = validateName();
-      } else if (currentId === 'tel') {
-        validity = validateTel();
-      } else if (currentId === 'mail') {
-        validity = validatePhone();
-      }
-      dispatch(setConsumerData({ validity, currentId }));
   };
 
   const getCartData = () => {
@@ -144,7 +112,7 @@ const CartList = () => {
       method: 'POST',
       body: { productsData: getCartData(), userData: params },
     });
-  
+
     cartRef.current.style.pointerEvents = 'none';
     setTimeout(() => {
       dispatch(deleteAll());
@@ -154,11 +122,18 @@ const CartList = () => {
   };
 
   return (
-    <div className={classNames({ 
-      "hide": cartState === "closed",
-      "cart-active": cartState === "opened",
-      "animate-cart-close": cartState === "closing",
-      }, "cart-container")} id="cart" ref={cartRef}>
+    <div
+      className={classNames(
+        {
+          hide: cartState === 'closed',
+          'cart-active': cartState === 'opened',
+          'animate-cart-close': cartState === 'closing',
+        },
+        'cart-container'
+      )}
+      id="cart"
+      ref={cartRef}
+    >
       <div className="cart">
         <div className="close-cart-wrapper">
           <button className="close-cart" onClick={closeCart}>
@@ -173,7 +148,9 @@ const CartList = () => {
               <th>{`Общая цена / ${goods[0].currency}`}</th>
               <th>Кол-во</th>
               <th className="delete delete-all" data-click="delete">
-                <span className="delete delete-all-span" data-click="delete">Очистить корзину</span>
+                <span className="delete delete-all-span" data-click="delete">
+                  Очистить корзину
+                </span>
               </th>
             </tr>
             {Object.keys(cart).map((key, index) => (
@@ -181,7 +158,7 @@ const CartList = () => {
             ))}
           </tbody>
         </table>
-        <div className={classNames({ "hide": counter !== 0 }, "cart-empty")}>Корзина пуста!</div>
+        <div className={classNames({ hide: counter !== 0 }, 'cart-empty')}>Корзина пуста!</div>
         <div className="total-result">
           <p>
             <b>Общая стоимость:</b>
@@ -195,7 +172,7 @@ const CartList = () => {
           </p>
           <p className="total-sum-number">{counter}</p>
         </div>
-        <CartForm isValid={checkValidity} send={sendOrder} close={closeCart}/>
+        <CartForm send={sendOrder} close={closeCart} />
       </div>
     </div>
   );
