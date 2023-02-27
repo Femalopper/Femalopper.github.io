@@ -7,7 +7,8 @@ checks:
     config:
       threshold: 4
   file-lines:
-    enabled: false
+    config:
+      threshold: false
   method-complexity:
     config:
       threshold: 5
@@ -15,8 +16,7 @@ checks:
     config:
       threshold: 20
   method-lines:
-    config:
-      threshold: 25
+    enabled: false
   nested-control-flow:
     config:
       threshold: 4
