@@ -1,4 +1,4 @@
-import { createSlice, current } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 export const cartSlice = createSlice({
   name: 'cart',
@@ -22,7 +22,6 @@ export const cartSlice = createSlice({
       if (state.cartGoods[articul] === undefined) state.cartGoods[articul] = 0;
       state.cartGoods[articul] += currentQuantity;
       state.counter += currentQuantity;
-      console.log(current);
     },
     decrement: (state, data) => {
       const articul = data.payload;
@@ -52,7 +51,6 @@ export const cartSlice = createSlice({
     },
     setConsumerData: (state, data) => {
       const obj = data.payload;
-      console.log(obj);
       const currentField = obj.currentId;
       state.consumerData[currentField].errorClass = obj.validity ? '' : 'incorrect';
       state.consumerData[currentField].validity = obj.validity;

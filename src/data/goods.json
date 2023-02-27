@@ -3,6 +3,7 @@
         "articul": "01",
         "title": "База + Топ комплект",
         "cost": "250",
+        "quantity": "1",
         "image": "1.jpg",
         "currency": "₽"
     },
@@ -10,6 +11,7 @@
         "articul": "10",
         "title": "База/Топ/Праймер",
         "cost": "350",
+        "quantity": "1",
         "image": "2.jpg",
         "currency": "₽"
     },
@@ -17,6 +19,7 @@
         "articul": "00",
         "title": "Стартовый Bluesky",
         "cost": "1500",
+        "quantity": "1",
         "image": "3.jpg",
         "currency": "₽"
     },
@@ -24,6 +27,7 @@
         "articul": "11",
         "title": "Начальный Bluesky",
         "cost": "1700",
+        "quantity": "1",
         "image": "4.jpg",
         "currency": "₽"
     }
