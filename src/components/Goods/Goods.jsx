@@ -58,7 +58,7 @@ const Goods = (props) => {
         width: 300,
       });
     } else {
-      goodQuantity.current.setAttribute('style', 'color:red');
+      goodQuantity.current.setAttribute('style', 'border: 1px solid red');
       setTimeout(() => {
         goodQuantity.current.removeAttribute('style');
       }, 1000);
