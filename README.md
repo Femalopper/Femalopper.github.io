@@ -35,12 +35,15 @@ Online shop template is an adaptive and cross-browser template for fast online s
 ```
 The file goods.json consists of information about products.
 The following fields in the file must be filled:
-- articul (unique item number of the product)
-- title (the name of the product)
-- cost (the price of the product)
-- image (name of the image with extension)
-- currency (must be the same for all products)
-- quantity (number of pcs)
+
+Field | Description 
+:------------ | :-------------|
+articul | unique item number of the product | 
+title | the name of the product | 
+cost | the price of the product | 
+quantity | number of pcs | 
+image | name of the image with extension | 
+currency | must be the same for all products | 
 
 ***
 ### 3\. Download new products images ###
