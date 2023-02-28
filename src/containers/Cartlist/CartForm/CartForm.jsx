@@ -5,16 +5,19 @@ import {
   selectConsumerData,
   setConsumerData,
   selectCart,
-  cartStateSwitcher
+  cartStateSwitcher,
 } from '../../../store/cartSlice';
 import { goodsStateSwitcher } from '../../../store/goodsSlice';
 import Swal from 'sweetalert2';
+import classNames from 'classnames';
+import './CartForm.css';
 
 const CartForm = React.forwardRef((props, ref) => {
   const submitButton = useSelector(selectSubmitBtnVisibility);
   const orderForm = useSelector(selectConsumerData);
   const dispatch = useDispatch();
   const cart = useSelector(selectCart);
+  const formRef = React.createRef();
 
   const validateEmail = (email) => {
     const re = /^[\w]{1}[\w-.]*@[\w-]+\.[a-z]{2,4}$/i;
@@ -50,13 +53,11 @@ const CartForm = React.forwardRef((props, ref) => {
       width: 300,
     });
 
-    const form = document.getElementById('cart-data');
-    
     fetch('#', {
       method: 'POST',
-      body: { productsData: cart, userData: [...new FormData(form)] },
+      body: { productsData: cart, userData: [...new FormData(formRef.current)] },
     });
-    console.log(ref)
+
     ref.current.style.pointerEvents = 'none';
     setTimeout(() => {
       dispatch(props.deleteAll());
@@ -68,14 +69,26 @@ const CartForm = React.forwardRef((props, ref) => {
 
   return (
     <>
-      <form id="cart-data" onSubmit={sendOrder}>
+      <form id="cart-data" onSubmit={sendOrder} ref={formRef}>
         <div className="make-order">
-            {Object.keys(orderForm).map((key) =>
-                <div key={key}><input type={key === "tel" ? "tel" : "text"} onInput={checkValidity}
-                className={`make-order-field ${orderForm[key].errorClass}`} name={key}
-                placeholder={key === "tel" ? "Введите телефон +7(✗✗✗)✗✗✗-✗✗-✗✗" : 
-                key === "name" ? "Введите имя" : "Введите e-mail"} /></div>
-                )}
+          {Object.keys(orderForm).map((key) => (
+            <div key={key}>
+              <input
+                type={key === 'tel' ? 'tel' : 'text'}
+                onInput={checkValidity}
+                className={classNames('make-order-field', { incorrect: orderForm[key].validity })}
+                name={key}
+                placeholder={
+                  key === 'tel'
+                    ? 'Введите телефон +7(✗✗✗)✗✗✗-✗✗-✗✗'
+                    : key === 'name'
+                    ? 'Введите имя'
+                    : 'Введите e-mail'
+                }
+                maxLength={key === 'tel' ? '16' : ''}
+              />
+            </div>
+          ))}
           <div>
             <a href="#">
               <input id="payment" className="payment" value="Оплатить" readOnly />

@@ -10,20 +10,20 @@ const Goods = (props) => {
   const goodQuantity = React.createRef();
   const goods = useSelector(selectGoods);
   const dispatch = useDispatch();
-  const { image, cost, title, currency, quantity, articul} = props.data;
+  const { image, cost, title, currency, quantity, articul } = props.data;
 
   const changeHandler = (event) => {
     event.preventDefault();
-    const { id, value } = goodQuantity.current
+    const { id, value } = goodQuantity.current;
     const currentId = goods.findIndex(({ articul }) => articul === id);
-    dispatch(changeGoodsQuantity({ currentId, value }))
+    dispatch(changeGoodsQuantity({ currentId, value }));
   };
 
   const handler = (t) => {
     const currentId = goods.findIndex(({ articul }) => articul === t.dataset.key);
     const value = +goods[currentId].quantity;
-    return ( {currentId, value} )
-  }
+    return { currentId, value };
+  };
 
   const plusHandler = (event) => {
     const { currentId, value } = handler(event.target);
@@ -48,7 +48,7 @@ const Goods = (props) => {
     if (value !== 0) {
       const data = [goodsObj[event.target.dataset.key], value];
       dispatch(increment(data));
-      dispatch(changeGoodsQuantity({ currentId, value: 1 }))
+      dispatch(changeGoodsQuantity({ currentId, value: 1 }));
       Swal.fire({
         position: 'center',
         icon: 'success',
@@ -57,6 +57,11 @@ const Goods = (props) => {
         timer: 1500,
         width: 300,
       });
+    } else {
+      goodQuantity.current.setAttribute('style', 'color:red');
+      setTimeout(() => {
+        goodQuantity.current.removeAttribute('style');
+      }, 1000);
     }
   };
 
@@ -88,7 +93,16 @@ const Goods = (props) => {
         <button className="minus-quantity" data-key={articul} onClick={minusHandler}>
           -
         </button>
-        <input id={articul} type="text" onKeyDown={inputIsValid} onBlur={inputIsEmpty} maxLength="2" ref={goodQuantity} onChange={changeHandler} value={quantity}></input>
+        <input
+          id={articul}
+          type="text"
+          onKeyDown={inputIsValid}
+          onBlur={inputIsEmpty}
+          maxLength="2"
+          ref={goodQuantity}
+          onChange={changeHandler}
+          value={quantity}
+        ></input>
         <button className="plus-quantity" data-key={articul} onClick={plusHandler}>
           +
         </button>

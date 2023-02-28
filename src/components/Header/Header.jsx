@@ -1,42 +1,38 @@
 import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  selectCounter,
-  cartStateSwitcher,
-} from '../../store/cartSlice';
+import { selectQuantity, cartStateSwitcher } from '../../store/cartSlice';
 import './Header.css';
-import { goodsStateSwitcher, selectGoodsState} from '../../store/goodsSlice';
+import { goodsStateSwitcher, selectGoodsState } from '../../store/goodsSlice';
 import cart from '../../img/cart.png';
 import classNames from 'classnames';
 
 const Header = (props) => {
-  const catries = props.data.nav;
-  const cat = catries.map((item, index) => (
+  const categories = props.data.nav.map((item, index) => (
     <li key={index}>
       <NavLink to={item.link}>{item.text}</NavLink>
     </li>
   ));
 
   const goodsState = useSelector(selectGoodsState);
-  const cartCounter = useSelector(selectCounter);
+  const totalQuantity = useSelector(selectQuantity);
   const dispatch = useDispatch();
 
   const openCart = (event) => {
     event.preventDefault();
-    dispatch(goodsStateSwitcher("closed"));
-    dispatch(cartStateSwitcher("openning"));
+    dispatch(goodsStateSwitcher('closed'));
+    dispatch(cartStateSwitcher('openning'));
     setTimeout(() => {
-      dispatch(cartStateSwitcher("opened"));
+      dispatch(cartStateSwitcher('opened'));
     });
   };
 
   return (
-    <div className={classNames({ "hide": goodsState === "closed"})} id="goods">
+    <div className={classNames({ hide: goodsState === 'closed' })} id="goods">
       <div className="menu">
         <div className="logo">Shellac Butik</div>
         <nav>
-          <ul>{cat}</ul>
+          <ul>{categories}</ul>
         </nav>
         <div className="mini-cart-img-span">
           <img
@@ -47,7 +43,7 @@ const Header = (props) => {
             height="30"
             onClick={openCart}
           ></img>
-          <span className="circle">{cartCounter}</span>
+          <span className="circle">{totalQuantity}</span>
         </div>
       </div>
       <Outlet />

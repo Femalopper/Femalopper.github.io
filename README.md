@@ -37,8 +37,9 @@ The following fields in the file must be filled:
 - articul (unique item number of the product)
 - title (the name of the product)
 - cost (the price of the product)
-- image (name of the image)
+- image (name of the image with extension)
 - currency (must be the same for all products)
+- quantity (number of pcs)
 
 ***
 ### 3\. Download new products images ###

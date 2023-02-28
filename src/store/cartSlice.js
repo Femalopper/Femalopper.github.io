@@ -4,16 +4,16 @@ export const cartSlice = createSlice({
   name: 'cart',
   initialState: {
     cartGoods: {},
-    counter: 0,
     cartProcess: {
       cartState: 'closed',
     },
     totalSum: 0,
+    totalQuantity: 0,
     submitBtnVisibility: true,
     consumerData: {
-      name: { validity: false, errorClass: '' },
-      tel: { validity: false, errorClass: '' },
-      mail: { validity: false, errorClass: '' },
+      name: { validity: false },
+      tel: { validity: false },
+      mail: { validity: false },
     },
   },
   reducers: {
@@ -26,28 +26,28 @@ export const cartSlice = createSlice({
       }
       state.totalSum += +data.payload[0].quantity * +data.payload[0].cost;
       state.cartGoods[articul].quantity += currentQuantity;
-      state.counter += currentQuantity;
+      state.totalQuantity += currentQuantity;
     },
     decrement: (state, data) => {
       const articul = data.payload;
       state.totalSum -= state.cartGoods[articul].cost;
       if (state.cartGoods[articul].quantity < 2) {
-        state.counter -= 1;
+        state.totalQuantity -= 1;
         delete state.cartGoods[articul];
       } else {
         state.cartGoods[articul].quantity -= 1;
-        state.counter -= 1;
+        state.totalQuantity -= 1;
       }
     },
     deleteItem: (state, data) => {
       const articul = data.payload;
-      state.counter = state.counter - state.cartGoods[articul].quantity;
+      state.totalQuantity = state.totalQuantity - state.cartGoods[articul].quantity;
       state.totalSum -= +state.cartGoods[articul].cost * state.cartGoods[articul].quantity;
       delete state.cartGoods[articul];
     },
     deleteAll: (state) => {
       state.cartGoods = {};
-      state.counter = 0;
+      state.totalQuantity = 0;
       state.totalSum = 0;
     },
     cartStateSwitcher: (state, data) => {
@@ -58,10 +58,8 @@ export const cartSlice = createSlice({
       state.submitBtnVisibility = data.payload;
     },
     setConsumerData: (state, data) => {
-      const obj = data.payload;
-      const currentField = obj.currentId;
-      state.consumerData[currentField].errorClass = obj.validity ? '' : 'incorrect';
-      state.consumerData[currentField].validity = obj.validity;
+      const currentField = data.payload.currentId;
+      state.consumerData[currentField].validity = !data.payload.validity;
     },
   },
 });
@@ -76,7 +74,7 @@ export const {
   setConsumerData,
 } = cartSlice.actions;
 export const selectCart = (state) => state.cart.cartGoods;
-export const selectCounter = (state) => state.cart.counter;
+export const selectQuantity = (state) => state.cart.totalQuantity;
 export const selectCartState = (state) => state.cart.cartProcess.cartState;
 export const selectConsumerData = (state) => state.cart.consumerData;
 export const selectTotalSum = (state) => state.cart.totalSum;

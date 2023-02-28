@@ -11,11 +11,7 @@ const Cart = (props) => {
         <td>
           <div className="cart-good-name">
             <div className="good-image">
-              <img
-                src={require(`../../img/${image}`)}
-                width="45px"
-                alt="productImage"
-              />
+              <img src={require(`../../img/${image}`)} width="45px" alt="productImage" />
             </div>
             <p className="good-name">{title}</p>
           </div>
@@ -23,12 +19,18 @@ const Cart = (props) => {
         <td>{cost}</td>
         <td>{quantity * cost}</td>
         <td>
-          <button className="minus" data-key={articul} data-click="minus">-</button>
+          <button className="minus" data-key={articul} data-click="minus">
+            -
+          </button>
           {quantity}
-          <button className="plus" data-key={articul} data-click="plus">+</button>
+          <button className="plus" data-key={articul} data-click="plus">
+            +
+          </button>
         </td>
         <td className="delete-item-td">
-          <button className="delete-item" data-key={articul} data-click="delete-item">×</button>
+          <button className="delete-item" data-key={articul} data-click="delete-item">
+            ×
+          </button>
         </td>
       </tr>
     </>

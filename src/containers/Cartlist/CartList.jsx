@@ -7,11 +7,11 @@ import {
   increment,
   deleteAll,
   selectCart,
-  selectCounter,
+  selectQuantity,
   selectCartState,
   submitBtnSwitcher,
   selectTotalSum,
-  cartStateSwitcher
+  cartStateSwitcher,
 } from '../../store/cartSlice';
 import Cart from '../../components/Cart/Cart';
 import './CartList.css';
@@ -24,7 +24,7 @@ const CartList = () => {
   const goods = useSelector(selectGoods);
   const cart = useSelector(selectCart);
   const cartState = useSelector(selectCartState);
-  const counter = useSelector(selectCounter);
+  const totalQuantity = useSelector(selectQuantity);
   const dispatch = useDispatch();
   const orderForm = useSelector(selectConsumerData);
   const cartRef = React.createRef();
@@ -32,14 +32,14 @@ const CartList = () => {
 
   const activateMakeOrderBtn = () => {
     const { name, tel, mail } = orderForm;
-    if (name.validity && tel.validity && mail.validity && counter !== 0) {
+    if (!name.validity && !tel.validity && !mail.validity && totalQuantity !== 0) {
       dispatch(submitBtnSwitcher(false));
     } else dispatch(submitBtnSwitcher(true));
   };
 
   useEffect(() => {
     activateMakeOrderBtn();
-  }, [counter, orderForm]);
+  }, [totalQuantity, orderForm]);
 
   const goodsObj = goods.reduce((acc, item) => {
     acc[item['articul']] = item;
@@ -114,7 +114,9 @@ const CartList = () => {
             ))}
           </tbody>
         </table>
-        <div className={classNames({ hide: counter !== 0 }, 'cart-empty')}>Корзина пуста!</div>
+        <div className={classNames({ hide: totalQuantity !== 0 }, 'cart-empty')}>
+          Корзина пуста!
+        </div>
         <div className="total-result">
           <p>
             <b>Общая стоимость:</b>
@@ -126,9 +128,9 @@ const CartList = () => {
           <p className="total-quantity">
             <b>Всего товаров:</b>
           </p>
-          <p className="total-sum-number">{counter}</p>
+          <p className="total-sum-number">{totalQuantity}</p>
         </div>
-        <CartForm close={closeCart} deleteAll={deleteAll} ref={cartRef}/>
+        <CartForm close={closeCart} deleteAll={deleteAll} ref={cartRef} />
       </div>
     </div>
   );

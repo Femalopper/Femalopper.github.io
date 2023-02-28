@@ -123,6 +123,10 @@ input::-webkit-inner-spin-button {
   background-color: #fc81fc !important;
 }
 
+.zero-quantity {
+  color: red;
+}
+
 @media screen and (min-width: 1000px) and (max-width: 1400px) {
   .goods-block {
     width: 20%;
