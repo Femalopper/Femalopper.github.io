@@ -6,9 +6,9 @@
 Online shop template is an adaptive and cross-browser template for fast online shops implementation. 
 
 ### Implemented features
-:heavy_check_mark: dynamic product catalog
+:heavy_check_mark: Dynamic product catalog
 
-:heavy_check_mark: cart
+:heavy_check_mark: Cart
 
 ## Animation
 
