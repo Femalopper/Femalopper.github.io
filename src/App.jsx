@@ -8,7 +8,7 @@ import Error from './components/Error/Error';
 
 // для полноценного интернет-магазина заполнить панель навигации
 const list = {
-  nav: [{ link: '/', text: 'Каталог товаров' }],
+  nav: [{ link: '/online-shop-template', text: 'Каталог товаров' }],
 };
 
 const App = () => {
@@ -16,7 +16,7 @@ const App = () => {
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<Header data={list} />}>
+          <Route path="/online-shop-template" element={<Header data={list} />}>
             <Route index element={<GoodsList />} />
             <Route path="*" element={<Error />} />
           </Route>
