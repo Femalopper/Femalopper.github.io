@@ -32,7 +32,7 @@ const CartList = () => {
 
   const activateMakeOrderBtn = () => {
     const { name, tel, mail } = orderForm;
-    if (!name.validity && !tel.validity && !mail.validity && totalQuantity !== 0) {
+    if (name.validity && tel.validity && mail.validity && totalQuantity !== 0) {
       dispatch(submitBtnSwitcher(false));
     } else dispatch(submitBtnSwitcher(true));
   };

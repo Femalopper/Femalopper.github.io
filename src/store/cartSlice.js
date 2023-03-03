@@ -11,9 +11,9 @@ export const cartSlice = createSlice({
     totalQuantity: 0,
     submitBtnVisibility: true,
     consumerData: {
-      name: { validity: false },
-      tel: { validity: false },
-      mail: { validity: false },
+      name: { validity: '', value: '' },
+      tel: { validity: '', value: '' },
+      mail: { validity: '', value: '' },
     },
   },
   reducers: {
@@ -58,8 +58,9 @@ export const cartSlice = createSlice({
       state.submitBtnVisibility = data.payload;
     },
     setConsumerData: (state, data) => {
-      const currentField = data.payload.currentId;
-      state.consumerData[currentField].validity = !data.payload.validity;
+      const { validity, currentId, value } = data.payload;
+      state.consumerData[currentId].validity = validity;
+      state.consumerData[currentId].value = value;
     },
   },
 });
