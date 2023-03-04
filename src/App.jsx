@@ -8,7 +8,13 @@ import Error from './components/Error/Error';
 
 // для полноценного интернет-магазина заполнить панель навигации
 const list = {
-  nav: [{ link: '/online-shop-template', text: 'Каталог товаров' }],
+  nav: [
+    { link: '/online-shop-template', text: 'Каталог товаров' },
+    { link: '/online-shop-template', text: 'Каталог товаров' },
+    { link: '/online-shop-template', text: 'Каталог товаров' },
+    { link: '/online-shop-template', text: 'Каталог товаров' },
+    { link: '/online-shop-template', text: 'Каталог товаров' },
+  ],
 };
 
 const App = () => {
